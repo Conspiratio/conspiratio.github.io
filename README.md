@@ -1,2 +1,2 @@
 # Conspiratio.Website
-Die aktuelle Website von www.conspiratio.net
+Die aktuelle Website von https://conspiratio.net
