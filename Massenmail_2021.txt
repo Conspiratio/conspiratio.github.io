@@ -1,0 +1,14 @@
+Liebe Spieler,
+ 
+zuerst einmal wünschen wir euch fröhliche Weihnachten und entspannte Feiertage.
+Auch dieses Jahr gibt es wieder ein kleines Update von Conspiratio: https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/1.4.4/Conspiratio.1.4.4.0.msi
+
+Es gab viele Korrekturen und kleinere Verbesserungen, hier der Changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#144---24122021
+
+Der Startschuss für den neuen Unity Client ist aufgrund von Zeitmangel leider noch nicht gefallen, für das nächste Jahr aber fest eingeplant. Interessierte Helfer sind weiterhin willkommen.
+
+Feedback, Wünsche oder Anregungen gerne über Discord (https://discord.gg/dxkC5DPgRY) oder im Forum (https://conspiratio.net/forum/viewtopic.php?f=12&t=60)
+
+Wir wünschen euch viel Spaß und einen guten Rutsch ins neue Jahr,
+
+Euer Conspiratio Team
