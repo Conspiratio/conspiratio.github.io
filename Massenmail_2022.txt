@@ -1,0 +1,14 @@
+Werte Spieler,
+ 
+frohe Weihnachten! Es ist wieder einmal soweit, es gibt Geschenke, so auch dieses Jahr in Form eines kleinen Conspiratio Updates:
+https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/1.4.5/Conspiratio.1.4.5.0.msi
+
+Dank Eures zahlreichen Feedbacks aus dem vergangenen Jahr gibt es viele Korrekturen, Verbesserungen sowie ein paar Kleinigkeiten, hier der Changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#145---24122022
+
+Ich habe geplant (um Erfahrungen für den neuen Client zu sammeln), jeweils einen Prototyp sowohl in Unity als auch in Godot zu erstellen. Damit bin ich auch bereits angefangen aber noch nicht so weit gekommen, wie erhofft. Mehr dazu in Kürze.
+
+Feedback, Wünsche oder Anregungen gerne über Discord (https://discord.gg/dxkC5DPgRY) oder im Forum (https://conspiratio.net/forum/viewtopic.php?p=184#p184)
+
+Viel Spaß, angenehme Feiertage und einen guten Rutsch ins neue Jahr,
+
+Euer Conspiratio Team
