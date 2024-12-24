@@ -1,0 +1,13 @@
+Werte Spieler,
+
+frohe Weihnachten! Wie schon in hier angekündigt habe ich einen Großteil des Dezembers krank verbracht, so dass ich in meiner freien Zeit nicht wie geplant an Conspiratio arbeiten konnte, sondern mich erholen musste. Daher wieder nur ein kleines Update: https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/1.4.7/Conspiratio.1.4.7.0.msi
+
+Hier findet ihr Details zu den Änderungen: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#147---24122024
+
+Eine erste Version des neuen Godot Client verschiebt sich auf Anfang nächsten Jahres Unterstützung in allen Bereichen wird weiterhin gesucht. Beteiligt euch gerne an den neuen Umfragen, diese findet ihr im Forum und in Discord und laufen 30 bzw. 14 Tage lang.
+
+Feedback, Wünsche oder Anregungen gerne über Discord (https://discord.gg/dxkC5DPgRY) oder im Forum (https://conspiratio.net/forum/viewtopic.php?f=12&t=71).
+
+Viel Spaß, schöne Feiertage und einen guten Rutsch,
+
+Euer Sir Toby und das Conspiratio Team
