@@ -137,10 +137,13 @@ dass die eigene Veröffentlichung daran scheitern soll); interne Verweise prüft
 und das schlägt sehr wohl fehl. lychee braucht `--root-dir`, sonst meldet es jeden wurzelrelativen
 Pfad als Fehler.
 
-Die Seite läuft unter `https://conspiratio.github.io/`. **Die Umstellung von `conspiratio.net` auf
-Pages hat noch nicht stattgefunden** — Reihenfolge, DNS-Werte und Fallstricke stehen in
-[`docs/umstellung-dns.md`](docs/umstellung-dns.md). Bis dahin melden CI-Läufe zwei Gruppen toter
-Verweise, beide erwartet: `forum.conspiratio.net` (die Subdomain entsteht erst) und
-`conspiratio.net/…` (kanonische Adressen, geprüft gegen die noch laufende alte Seite).
+Die Seite läuft seit dem **12.09.2026 unter `https://conspiratio.net`**; `conspiratio.github.io`
+zeigt dasselbe. Das Forum liegt seither unter `forum.conspiratio.net` (weiterhin bei Hostgator,
+wie die Mail), und das Zertifikat von GitHub deckt Apex und `www` ab.
+
+Der Ablauf der Umstellung samt der Stellen, an denen es anders kam als geplant, steht als
+Protokoll in [`docs/umstellung-dns.md`](docs/umstellung-dns.md) — dort auch, worauf beim Messen
+zu achten ist (Mod_Security weist Abrufe ohne browserartige Kopfzeilen ab, und das ausgelieferte
+Zertifikat hängt an der SNI).
 
 Entwurf und Plan des Neubaus liegen unter [`docs/superpowers/`](docs/superpowers/).
