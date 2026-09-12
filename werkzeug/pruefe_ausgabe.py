@@ -257,6 +257,42 @@ def das_archiv_reicht_bis_2018_zurueck() -> None:
         pruefe(version in archiv, f"das Archiv nennt Version {version} nicht")
 
 
+ERWARTETE_SEITEN = [
+    "index.html", "spiel/index.html", "downloads/index.html", "bilder/index.html",
+    "news/index.html", "mitmachen/index.html", "kontakt/index.html", "links/index.html",
+    "impressum/index.html", "en/index.html",
+]
+
+
+@pruefung
+def alle_seiten_existieren() -> None:
+    for pfad in ERWARTETE_SEITEN:
+        pruefe((SITE / pfad).is_file(), f"{pfad} fehlt")
+
+
+@pruefung
+def die_startseite_zeigt_die_neuesten_meldungen() -> None:
+    text = lies("index.html")
+    pruefe(text.count('class="news-anriss"') == 3,
+           "Startseite: es stehen nicht genau drei News-Anrisse darauf")
+    pruefe("/downloads/" in text, "Startseite: kein Weg zu den Downloads")
+
+
+@pruefung
+def die_englische_seite_ist_englisch_ausgezeichnet() -> None:
+    text = lies("en/index.html")
+    pruefe('lang="en"' in text, "en/index.html: nicht als englisch ausgezeichnet")
+
+
+@pruefung
+def kein_verweis_mehr_auf_das_alte_forum() -> None:
+    for seite in seiten():
+        text = seite.read_text(encoding="utf-8")
+        pfad = seite.relative_to(SITE)
+        pruefe("conspiratio.net/forum" not in text,
+               f"{pfad}: verweist noch auf conspiratio.net/forum statt forum.conspiratio.net")
+
+
 def main() -> int:
     for funktion in PRUEFUNGEN:
         funktion()
