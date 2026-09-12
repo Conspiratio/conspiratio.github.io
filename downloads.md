@@ -22,7 +22,8 @@ Ein eigenes Handbuch zum neuen Client entsteht gerade; bis dahin gilt das
 [bestehende Wiki](https://github.com/Conspiratio/Conspiratio.Wiki/wiki), dessen Spielregeln
 für beide Clients dieselben sind.
 
-**Systemvoraussetzungen:** Windows 10 oder Windows 11, .NET 8.
+**Systemvoraussetzungen:** Windows 10 oder Windows 11,
+[.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0).
 
 ## Der bisherige Client (WinForms)
 
@@ -36,7 +37,7 @@ für beide Clients dieselben sind.
 </p>
 
 **Systemvoraussetzungen:** Windows 7 bis Windows 11,
-[.NET Framework 4.6.2](https://www.microsoft.com/de-de/download/details.aspx?id=53344),
+[.NET Framework 4.6.2](https://dotnet.microsoft.com/download/dotnet-framework/net462),
 Administratorrechte für die Installation.
 
 ### Installation
