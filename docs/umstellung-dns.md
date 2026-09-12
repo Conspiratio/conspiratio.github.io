@@ -12,6 +12,10 @@ setzen und im Forum selbst die Basis-URL auf `https://forum.conspiratio.net/` um
 Erst weitermachen, wenn das Forum über die neue Adresse erreichbar ist. Die neue Seite
 verweist bereits ausschließlich dorthin.
 
+Solange die Subdomain fehlt, meldet der lychee-Schritt in CI sie zu Recht als nicht
+erreichbar. Das ist erwartet und blockiert nichts (`fail: false`); nach diesem Schritt
+verschwindet die Meldung von selbst.
+
 ## 2. Neue Seite unter github.io abnehmen
 
 In `Settings → Pages → Build and deployment → Source` auf **„GitHub Actions"** stellen.

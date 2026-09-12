@@ -38,11 +38,19 @@ jobs:
         with:
           args: >-
             --no-progress --accept 200,206,429
+            --root-dir "${{ github.workspace }}/_site"
             --exclude-path _site/assets
             '_site/**/*.html'
+          # --root-dir ist nötig, sonst meldet lychee jeden wurzelrelativen Pfad
+          # als Fehler ("Cannot resolve root-relative link") - beim ersten Lauf
+          # waren das 392 von 479 Verweisen und der Bericht damit unlesbar.
+          #
           # Absichtlich nicht fehlschlagend: Fremde Seiten verschwinden, ohne
           # dass die eigene Veröffentlichung daran scheitern soll. Die internen
           # Verweise prüft pruefe_ausgabe.py, und das schlägt sehr wohl fehl.
+          # Bis Schritt 1 der DNS-Umstellung meldet lychee hier zu Recht
+          # forum.conspiratio.net als nicht erreichbar - die Subdomain gibt es
+          # noch nicht.
           fail: false
       - uses: actions/upload-pages-artifact@v3
         with:
