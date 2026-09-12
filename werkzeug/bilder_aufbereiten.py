@@ -2,11 +2,13 @@
 """Bereitet Rohbilder fuer die Galerie auf: skalieren, WebP, Masse nach _data/bilder.yml.
 
 Quellen (beide nicht im Repo bzw. nicht veroeffentlicht):
-  rohbilder/godot/*.png   Aufnahmen aus dem E2E-Treiber des Godot-Clients,
-                          entnommen aus Conspiratio.Godot/docs/ansichten/ und
-                          nach Motiv umbenannt. Der Ordner ist in .gitignore;
-                          veroeffentlicht werden nur die fertigen WebP.
-  screenshots/*.jpg       Die alten WinForms-Aufnahmen aus der bisherigen Seite.
+  rohbilder/godot/*.png       Aufnahmen aus dem E2E-Treiber des Godot-Clients,
+                              entnommen aus Conspiratio.Godot/docs/ansichten/ und
+                              nach Motiv umbenannt. Der Ordner ist in .gitignore.
+  quellen/screenshots/*.jpg   Die alten WinForms-Aufnahmen der bisherigen Seite.
+
+Veroeffentlicht werden nur die fertigen WebP unter assets/bilder/; quellen/
+steht in der exclude-Liste von _config.yml.
 
 Aufruf: python werkzeug/bilder_aufbereiten.py
 
@@ -61,7 +63,7 @@ def main() -> int:
 
     quellen = (
         ("godot", WURZEL / "rohbilder" / "godot", ".png", GODOT),
-        ("winforms", WURZEL / "screenshots", ".jpg", WINFORMS),
+        ("winforms", WURZEL / "quellen" / "screenshots", ".jpg", WINFORMS),
     )
 
     for client, verzeichnis, endung, motive in quellen:

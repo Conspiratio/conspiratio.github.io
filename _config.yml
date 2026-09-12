@@ -34,15 +34,7 @@ exclude:
   - rohbilder/
   - "*.txt"
 
-  # Die alte Seite. Sie bleibt bis Aufgabe 9 im Repo liegen, gehoert aber nicht
-  # mehr zur Ausgabe - und wuerde die Weiterleitungsstuempfe gleichen Namens
-  # verdecken, die jekyll-redirect-from erzeugt.
-  - geschichte.html
-  - download.html
-  - bilder.html
-  - ueber.html
-  - links.html
-  - kontakt.html
-  - cons.css
-  - OLDENGL.TTF
-  - Jurist_aufsuchen.png
+  # Quellmaterial: die unbearbeiteten Vorlagen der Bilder unter assets/bilder/.
+  # Sie bleiben im Repo, damit sie sich neu aufbereiten lassen, gehoeren aber
+  # nicht in die Ausgabe - ausgeliefert werden nur die fertigen WebP.
+  - quellen/

@@ -359,6 +359,32 @@ def alle_oertlichen_verweise_zeigen_auf_vorhandene_dateien() -> None:
             pruefe(ok, f"{pfad}: toter interner Verweis auf {ziel}")
 
 
+WEITERLEITUNGEN = {
+    "geschichte.html": "/spiel/",
+    "download.html": "/downloads/",
+    "bilder.html": "/bilder/",
+    "ueber.html": "/mitmachen/",
+    "links.html": "/links/",
+    "kontakt.html": "/kontakt/",
+}
+
+
+@pruefung
+def die_alten_adressen_leiten_weiter() -> None:
+    for alt, neu in WEITERLEITUNGEN.items():
+        text = lies(alt)
+        pruefe(text != "", f"{alt}: Weiterleitung fehlt")
+        pruefe(neu in text, f"{alt}: leitet nicht auf {neu}")
+
+
+@pruefung
+def die_altlasten_sind_verschwunden() -> None:
+    for name in ("cons.css", "OLDENGL.TTF", "Jurist_aufsuchen.png",
+                 "header4.png", "pergament3.png", "hintIntro.png"):
+        pruefe(not (SITE / name).exists(), f"{name} wird noch ausgeliefert")
+    pruefe(not list(SITE.rglob("*_thumb.jpg")), "es werden noch _thumb-Dateien ausgeliefert")
+
+
 def main() -> int:
     for funktion in PRUEFUNGEN:
         funktion()
