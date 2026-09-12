@@ -17,7 +17,10 @@ erste Fassung erscheint demnächst.
 
 - [Entwicklungsstand und Quellcode](https://github.com/Conspiratio/Conspiratio.Godot)
 - [Was neu sein wird](https://github.com/Conspiratio/Conspiratio.Godot/blob/main/CHANGELOG.md)
-- [Handbuch zum neuen Client](https://conspiratio.github.io/Conspiratio.Wiki/)
+
+Ein eigenes Handbuch zum neuen Client entsteht gerade; bis dahin gilt das
+[bestehende Wiki](https://github.com/Conspiratio/Conspiratio.Wiki/wiki), dessen Spielregeln
+für beide Clients dieselben sind.
 
 **Systemvoraussetzungen:** Windows 10 oder Windows 11, .NET 8.
 
@@ -62,5 +65,5 @@ Administratorrechte für die Installation.
 
 ## Hinweise zum Spiel
 
-Nähere Informationen stehen im [Handbuch](https://conspiratio.github.io/Conspiratio.Wiki/),
+Nähere Informationen stehen im [Wiki](https://github.com/Conspiratio/Conspiratio.Wiki/wiki),
 im [Forum](https://forum.conspiratio.net/) oder im beigelegten ReadMe.
