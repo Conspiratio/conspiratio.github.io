@@ -106,21 +106,34 @@ img { max-width: 100%; height: auto; }
 .textspalte { max-width: var(--spaltenbreite); margin: 0 auto; padding: 0 1.25rem 4rem; }
 
 /* ---------- Kopf ---------- */
-.kopf { position: relative; text-align: center; padding: 1.5rem 1rem 0.5rem; }
+.kopf { position: relative; text-align: center; padding: 1.15rem 1rem 1.35rem; }
 .wortmarke {
-  display: inline-flex; align-items: center; gap: 0.3em;
+  /* baseline, nicht center: Das Siegel soll auf derselben Linie stehen wie das
+     "C", nicht in der Mitte einer Zeilenbox, die von den langen Ober- und
+     Unterlaengen der gebrochenen Schrift bestimmt wird. */
+  display: inline-flex; align-items: baseline; gap: 0.28em;
   font-size: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
   text-decoration: none; color: var(--schrift);
 }
 
-/* Das rote Wachssiegel mit dem Fraktur-C. Es waechst mit der Wortmarke (em,
-   nicht px) und traegt einen weichen Schatten, damit es auf hellem wie auf
-   dunklem Grund plastisch bleibt - ohne ihn verschwindet der dunkelrote Rand
-   im dunklen Thema fast. */
+/* Das rote Wachssiegel mit dem Fraktur-C, buendig zum Versal daneben.
+   Die Werte sind gemessen, nicht geschaetzt: Das "C" der Grenze Gotisch reicht
+   0,611 em ueber die Grundlinie und 0,014 em darunter (der uebliche Ueberschuss
+   runder Formen), zusammen 0,625 em. Atkinson Hyperlegible hat eine groessere
+   Versalhoehe, daher der eigene Wert beim Schriftschalter.
+   Die Grafik ist auf ihren sichtbaren Bereich beschnitten - mit dem
+   transparenten Rand des Originals waere die Ausrichtung um dessen Breite
+   daneben. */
+:root            { --versalhoehe: 0.625em; }
+:root[data-schrift="lesbar"] { --versalhoehe: 0.694em; }
+
 .siegel {
-  height: 0.92em;
+  height: var(--versalhoehe);
   width: auto;
   flex: none;
+  /* align-items: baseline setzt die Unterkante auf die Grundlinie; diese
+     Verschiebung gibt ihr denselben Ueberschuss nach unten wie dem "C". */
+  transform: translateY(0.014em);
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.35));
 }
 
@@ -231,6 +244,30 @@ img { max-width: 100%; height: auto; }
 }
 .galerie figure { margin: 0; }
 .galerie figcaption { font-size: 0.9rem; color: var(--schrift-leise); }
+
+/* Die neueste Meldung als abgesetzte Karte - der Blickfang der Startseite.
+   Der Akzentstreifen oben traegt die Aufmerksamkeit, ohne dass die Karte eine
+   eigene Farbe braeuchte, die in einem der beiden Themen schief laege. */
+.neuigkeit { max-width: var(--tafelbreite); margin: 2.5rem auto 0; padding: 0 1.25rem; }
+.neuigkeit-karte {
+  display: grid; gap: 0.45rem;
+  background: var(--grund-erhoben);
+  border: 1px solid var(--linie);
+  border-top: 4px solid var(--akzent);
+  border-radius: 4px;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+.neuigkeit-marke {
+  margin: 0;
+  font-family: var(--schrift-text);
+  font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--akzent);
+}
+.neuigkeit-karte h2 { margin: 0; font-size: clamp(1.6rem, 1.1rem + 2vw, 2.6rem); }
+.neuigkeit-karte h2 a { color: var(--schrift); text-decoration: none; }
+.neuigkeit-karte h2 a:hover { color: var(--akzent); text-decoration: underline; }
+.neuigkeit-datum { margin: 0; color: var(--schrift-leise); font-size: 0.92rem; }
+.neuigkeit-text { margin: 0.35rem 0 0.5rem; font-size: 1.05em; }
 
 .news-anriss { border-top: 1px solid var(--linie); padding-top: 1rem; margin-top: 1.5rem; }
 .news-anriss h2 { margin-top: 0; }

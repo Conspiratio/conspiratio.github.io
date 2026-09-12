@@ -11,10 +11,35 @@ layout: basis
   </div>
 </div>
 
+{%- comment -%}
+Die neueste Meldung steht als eigene Karte da, nicht als einer von drei
+gleichen Anrissen: Wer die Seite besucht, soll auf den ersten Blick sehen, dass
+das Projekt lebt und wann zuletzt etwas geschah.
+{%- endcomment -%}
+{%- assign neueste = site.posts.first -%}
+{%- if neueste %}
+<section class="neuigkeit" aria-labelledby="neueste-meldung">
+  <article class="neuigkeit-karte">
+    <p class="neuigkeit-marke">Neueste Meldung</p>
+    <h2 id="neueste-meldung"><a href="{{ neueste.url }}">{{ neueste.title }}</a></h2>
+    <p class="neuigkeit-datum">
+      <time datetime="{{ neueste.date | date_to_xmlschema }}">{% include datum-lang.html datum=neueste.date %}</time>
+    </p>
+    <p class="neuigkeit-text">
+      {{ neueste.excerpt | strip_html | strip_newlines | truncate: 320 }}
+    </p>
+    <p><a class="knopf" href="{{ neueste.url }}">Weiterlesen</a></p>
+  </article>
+</section>
+{%- endif %}
+
 <section class="textspalte">
-  <h2>Ankündigungen</h2>
-  {%- for meldung in site.posts limit: 3 %}
+  <h2>Weitere Meldungen</h2>
+  {%- for meldung in site.posts offset: 1 limit: 2 %}
     {% include news-anriss.html meldung=meldung %}
   {%- endfor %}
-  <p><a href="/news/">Alle Meldungen</a></p>
+  <p>
+    <a href="/news/">Alle Meldungen</a> ·
+    <a href="/feed.xml">RSS-Feed</a>
+  </p>
 </section>

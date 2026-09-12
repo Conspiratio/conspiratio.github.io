@@ -291,10 +291,23 @@ def alle_seiten_existieren() -> None:
 
 @pruefung
 def die_startseite_zeigt_die_neuesten_meldungen() -> None:
+    """Eine hervorgehobene Karte mit der neuesten Meldung, darunter zwei
+    Anrisse - zusammen die drei jüngsten, ohne Wiederholung."""
     text = lies("index.html")
-    pruefe(text.count('class="news-anriss"') == 3,
-           "Startseite: es stehen nicht genau drei News-Anrisse darauf")
+    pruefe(text.count('class="neuigkeit-karte"') == 1,
+           "Startseite: die hervorgehobene Meldung fehlt oder steht mehrfach")
+    pruefe(text.count('class="news-anriss"') == 2,
+           "Startseite: es stehen nicht genau zwei weitere Anrisse darauf")
     pruefe("/downloads/" in text, "Startseite: kein Weg zu den Downloads")
+    pruefe("/feed.xml" in text, "Startseite: kein Verweis auf den Feed")
+
+    # Die hervorgehobene Meldung darf nicht noch einmal als Anriss erscheinen.
+    jung = sorted(meldungen(), reverse=True)
+    if jung:
+        neueste = "/" + jung[0].parent.relative_to(SITE).as_posix() + "/"
+        kopf, _, rest = text.partition('class="news-anriss"')
+        pruefe(neueste not in rest,
+               f"Startseite: {neueste} steht doppelt (Karte und Anriss)")
 
 
 @pruefung
@@ -306,6 +319,21 @@ def keine_platzhalter_in_der_ausgabe() -> None:
         pfad = seite.relative_to(SITE)
         for verraeter in ("BITTE-AUSFUELLEN", "Platzhalter", "TODO", "Lorem ipsum"):
             pruefe(verraeter not in text, f"{pfad}: enthaelt den Platzhalter '{verraeter}'")
+
+
+@pruefung
+def kein_englischer_monatsname_auf_deutschen_seiten() -> None:
+    """Jekylls date-Filter bildet Monatsnamen ueber Rubys strftime - und die
+    stehen englisch da. Auf einer deutschen Seite faellt das sofort auf."""
+    englisch = ("January", "February", "March", "April", "June", "July",
+                "August", "September", "October", "November", "December")
+    for seite in seiten():
+        text = seite.read_text(encoding="utf-8")
+        pfad = seite.relative_to(SITE)
+        if ist_weiterleitung(text) or str(pfad).startswith("en"):
+            continue
+        for monat in englisch:
+            pruefe(monat not in text, f"{pfad}: englischer Monatsname '{monat}'")
 
 
 @pruefung

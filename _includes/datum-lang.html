@@ -1,0 +1,8 @@
+{%- comment -%}
+Ausgeschriebenes Datum auf Deutsch. Nötig, weil Jekylls date-Filter die
+Monatsnamen über Rubys strftime bildet und die stehen englisch da ("January").
+Aufruf: {% include datum-lang.html datum=page.date %}
+{%- endcomment -%}
+{%- assign monate = "Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember" | split: "," -%}
+{%- assign nummer = include.datum | date: "%-m" | minus: 1 -%}
+{{- include.datum | date: "%-d" }}. {{ monate[nummer] }} {{ include.datum | date: "%Y" -}}
