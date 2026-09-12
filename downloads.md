@@ -18,12 +18,15 @@ erste Fassung erscheint demnächst.
 - [Entwicklungsstand und Quellcode](https://github.com/Conspiratio/Conspiratio.Godot)
 - [Was neu sein wird](https://github.com/Conspiratio/Conspiratio.Godot/blob/main/CHANGELOG.md)
 
+Er erscheint für **Windows und Linux** — beide Fassungen entstehen aus demselben Stand und
+werden automatisch gebaut.
+
+**Systemvoraussetzungen:** Windows 10 oder Windows 11 beziehungsweise eine aktuelle
+Linux-Distribution, dazu [.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0).
+
 Ein eigenes Handbuch zum neuen Client entsteht gerade; bis dahin gilt das
 [bestehende Wiki](https://github.com/Conspiratio/Conspiratio.Wiki/wiki), dessen Spielregeln
 für beide Clients dieselben sind.
-
-**Systemvoraussetzungen:** Windows 10 oder Windows 11,
-[.NET 8](https://dotnet.microsoft.com/download/dotnet/8.0).
 
 ## Der bisherige Client (WinForms)
 

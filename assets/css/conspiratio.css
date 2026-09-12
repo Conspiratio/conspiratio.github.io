@@ -304,3 +304,15 @@ img { max-width: 100%; height: auto; }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------- Linkliste ----------
+   Eine echte <ul>: Titel als Verweis, Beschreibung als eigene Zeile darunter.
+   Vorher stand beides als Fließtext hintereinander und ließ nicht erkennen,
+   wo ein Eintrag endet und der nächste beginnt. */
+.linkliste { padding-left: 1.2rem; }
+.linkliste li { margin-bottom: 1rem; }
+.linkliste-text {
+  display: block;
+  color: var(--schrift-leise);
+  font-size: 0.95em;
+}

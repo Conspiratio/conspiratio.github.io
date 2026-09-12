@@ -20,20 +20,20 @@ Diese Verarbeitung liegt außerhalb unseres Einflusses; Näheres steht in der
 - **Keine Zählung, keine Analyse.** Es gibt kein Analysewerkzeug, keine Zählpixel, keine
   Einbindung sozialer Netzwerke.
 - **Keine fremden Inhalte.** Schriftarten, Bilder, Stilvorlagen und Skripte werden von
-  diesem Server ausgeliefert. Es gehen also auch keine Abrufe an Dritte, die dabei Ihre
+  diesem Server ausgeliefert. Es gehen also auch keine Abrufe an Dritte, die dabei Eure
   IP-Adresse sehen würden.
 - **Keine Formulare.** Es gibt nichts abzuschicken.
 
 Die Wahl von Farbschema und Schriftart merkt sich der Browser im lokalen Speicher
-(`localStorage`). Diese Angabe verlässt Ihr Gerät nicht, wird nicht übertragen und ist uns
-nicht zugänglich. Sie können sie jederzeit löschen, indem Sie die Websitedaten in Ihrem
-Browser leeren.
+(`localStorage`). Diese Angabe verlässt Euer Gerät nicht, wird nicht übertragen und ist uns
+nicht zugänglich. Ihr könnt sie jederzeit löschen, indem Ihr die Websitedaten in Eurem
+Browser leert.
 
-## Wenn Sie diese Seite verlassen
+## Wenn Ihr diese Seite verlasst
 
 Verweise auf Discord, GitHub, YouTube, Steam, Wikipedia und das Forum führen zu fremden
 Anbietern mit eigenen Datenschutzbestimmungen. Auf deren Inhalte und Datenverarbeitung
-haben wir keinen Einfluss. Ein Abruf dort findet erst statt, wenn Sie den Verweis anklicken.
+haben wir keinen Einfluss. Ein Abruf dort findet erst statt, wenn Ihr den Verweis anklickt.
 
 ## Kontakt
 
