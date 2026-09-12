@@ -203,10 +203,29 @@ def das_thema_steht_vor_dem_ersten_zeichnen_fest() -> None:
 
 @pruefung
 def die_schalter_sind_bedienbar() -> None:
-    text = lies("index.html")
-    pruefe('id="schalter-thema"' in text, "index.html: Themenschalter fehlt")
-    pruefe('id="schalter-schrift"' in text, "index.html: Schriftschalter fehlt")
-    pruefe("aria-pressed" in text, "index.html: Schalter ohne aria-pressed")
+    """Die Schalter tragen keinen sichtbaren Text mehr, nur Symbole. Damit ist
+    aria-label die einzige Beschriftung - sie darf nicht verlorengehen."""
+    for seite in seiten():
+        text = seite.read_text(encoding="utf-8")
+        if ist_weiterleitung(text):
+            continue
+        pfad = seite.relative_to(SITE)
+        for kennung in ("schalter-thema", "schalter-schrift"):
+            stelle = text.find(f'id="{kennung}"')
+            pruefe(stelle != -1, f"{pfad}: {kennung} fehlt")
+            if stelle == -1:
+                continue
+            # Das oeffnende <button ...>-Tag um die Kennung herum betrachten.
+            anfang = text.rfind("<button", 0, stelle)
+            tag = text[anfang:text.find(">", stelle) + 1]
+            for pflicht in ("aria-pressed", "aria-label", "title"):
+                pruefe(pflicht in tag, f"{pfad}: {kennung} ohne {pflicht}")
+
+    # Beide Symbole des Themenschalters muessen im Dokument stehen; welches
+    # sichtbar ist, entscheidet das Stylesheet.
+    start = lies("index.html")
+    for klasse in ("ikon-dunkel", "ikon-hell"):
+        pruefe(klasse in start, f"index.html: Symbol {klasse} fehlt")
 
 
 def meldungen() -> list[pathlib.Path]:
@@ -272,10 +291,23 @@ def alle_seiten_existieren() -> None:
 
 @pruefung
 def die_startseite_zeigt_die_neuesten_meldungen() -> None:
+    """Eine hervorgehobene Karte mit der neuesten Meldung, darunter zwei
+    Anrisse - zusammen die drei jüngsten, ohne Wiederholung."""
     text = lies("index.html")
-    pruefe(text.count('class="news-anriss"') == 3,
-           "Startseite: es stehen nicht genau drei News-Anrisse darauf")
+    pruefe(text.count('class="neuigkeit-karte"') == 1,
+           "Startseite: die hervorgehobene Meldung fehlt oder steht mehrfach")
+    pruefe(text.count('class="news-anriss"') == 2,
+           "Startseite: es stehen nicht genau zwei weitere Anrisse darauf")
     pruefe("/downloads/" in text, "Startseite: kein Weg zu den Downloads")
+    pruefe("/feed.xml" in text, "Startseite: kein Verweis auf den Feed")
+
+    # Die hervorgehobene Meldung darf nicht noch einmal als Anriss erscheinen.
+    jung = sorted(meldungen(), reverse=True)
+    if jung:
+        neueste = "/" + jung[0].parent.relative_to(SITE).as_posix() + "/"
+        kopf, _, rest = text.partition('class="news-anriss"')
+        pruefe(neueste not in rest,
+               f"Startseite: {neueste} steht doppelt (Karte und Anriss)")
 
 
 @pruefung
@@ -287,6 +319,21 @@ def keine_platzhalter_in_der_ausgabe() -> None:
         pfad = seite.relative_to(SITE)
         for verraeter in ("BITTE-AUSFUELLEN", "Platzhalter", "TODO", "Lorem ipsum"):
             pruefe(verraeter not in text, f"{pfad}: enthaelt den Platzhalter '{verraeter}'")
+
+
+@pruefung
+def kein_englischer_monatsname_auf_deutschen_seiten() -> None:
+    """Jekylls date-Filter bildet Monatsnamen ueber Rubys strftime - und die
+    stehen englisch da. Auf einer deutschen Seite faellt das sofort auf."""
+    englisch = ("January", "February", "March", "April", "June", "July",
+                "August", "September", "October", "November", "December")
+    for seite in seiten():
+        text = seite.read_text(encoding="utf-8")
+        pfad = seite.relative_to(SITE)
+        if ist_weiterleitung(text) or str(pfad).startswith("en"):
+            continue
+        for monat in englisch:
+            pruefe(monat not in text, f"{pfad}: englischer Monatsname '{monat}'")
 
 
 @pruefung

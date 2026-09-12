@@ -6,8 +6,11 @@
   ziel: /downloads/
 - titel: News
   ziel: /news/
+# Das eigenstaendige Handbuch zum Godot-Client entsteht erst
+# (https://conspiratio.github.io/Conspiratio.Wiki/ - derzeit 404). Bis dahin
+# zeigt der Menuepunkt auf das vorhandene Wiki, wie die alte Seite auch.
 - titel: Handbuch
-  ziel: https://conspiratio.github.io/Conspiratio.Wiki/
+  ziel: https://github.com/Conspiratio/Conspiratio.Wiki/wiki
   extern: true
 - titel: Mitmachen
   ziel: /mitmachen/

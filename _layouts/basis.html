@@ -25,12 +25,29 @@
 <body>
   <a class="zum-inhalt" href="#inhalt">Zum Inhalt springen</a>
   <header class="kopf">
-    <a class="wortmarke" href="/">Conspiratio</a>
+    {%- include schalter.html -%}
+    <a class="wortmarke" href="/">
+      {%- comment -%}
+      Das Siegel lag bisher nur als Favicon im Repo. alt="" ist richtig: Der
+      Name steht direkt daneben, eine Wiederholung waere fuer Screenreader nur
+      Laerm.
+      {%- endcomment -%}
+      <img class="siegel" src="/assets/bilder/logo-siegel.webp" alt=""
+           width="173" height="180">Conspiratio</a>
   </header>
-  <img class="zierbalken" src="/assets/bilder/zierbalken.webp" alt=""
-       width="1000" height="88">
+  {%- comment -%}
+  Der Zierbalken: eine durchgehend gekachelte Holzleiste, auf der die sechs
+  Spielsymbole liegen - Handel, Finanzen, Werkstatt, Kirche, Gericht, Karawane.
+  Rein schmueckend, deshalb aria-hidden und leere alt-Texte.
+  {%- endcomment -%}
+  <div class="zierbalken" aria-hidden="true">
+    {%- assign symbole = "haus,truhe,werkstatt,kirche,justiz,karawane" | split: "," -%}
+    {%- for symbol in symbole -%}
+    <img class="zierbalken-symbol" src="/assets/bilder/symbol-{{ symbol }}.webp"
+         alt="" width="160" height="160">
+    {%- endfor -%}
+  </div>
   {%- include navigation.html -%}
-  {%- include schalter.html -%}
   <main id="inhalt">
     {{ content }}
   </main>

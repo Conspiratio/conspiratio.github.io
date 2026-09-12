@@ -51,5 +51,5 @@ fortbestehende Dynastie zu errichten?
 ---
 
 Einzelheiten zu allen Regeln stehen im
-[Handbuch](https://conspiratio.github.io/Conspiratio.Wiki/); einen Eindruck geben die
+[Wiki](https://github.com/Conspiratio/Conspiratio.Wiki/wiki); einen Eindruck geben die
 [Bilder](/bilder/).

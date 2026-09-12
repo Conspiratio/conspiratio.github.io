@@ -1,5 +1,10 @@
 // Thema und Schriftart umschalten. Die Seite funktioniert ohne diese Datei
 // vollstaendig - dann gilt die Systemeinstellung und die Standardschrift.
+//
+// Das sichtbare Symbol der Schalter wechselt ueber CSS, nicht hier: Die Knoepfe
+// enthalten beide SVG, und das Stylesheet zeigt je nach wirksamem Thema die
+// passende. Dieses Skript setzt nur Attribute - wuerde es textContent setzen,
+// waere die SVG weg.
 (function () {
   "use strict";
 
@@ -9,7 +14,13 @@
     try {
       if (wert === null) { localStorage.removeItem(schluessel); }
       else { localStorage.setItem(schluessel, wert); }
-    } catch (e) { /* privates Fenster oder gesperrter Speicher: dann eben nur diese Seite */ }
+    } catch (e) { /* privates Fenster oder gesperrter Speicher: dann nur diese Seite */ }
+  }
+
+  function beschrifte(knopf, gedrueckt, beschriftung) {
+    knopf.setAttribute("aria-pressed", gedrueckt ? "true" : "false");
+    knopf.setAttribute("aria-label", beschriftung);
+    knopf.setAttribute("title", beschriftung);
   }
 
   // --- Thema -------------------------------------------------------------
@@ -20,15 +31,15 @@
   if (themenKnopf) {
     var dunkelBevorzugt = window.matchMedia("(prefers-color-scheme: dark)");
 
-    function wirksamesThema() {
+    var wirksamesThema = function () {
       return wurzel.getAttribute("data-thema") || (dunkelBevorzugt.matches ? "dunkel" : "hell");
-    }
+    };
 
-    function zeigeThema() {
+    var zeigeThema = function () {
       var dunkel = wirksamesThema() === "dunkel";
-      themenKnopf.setAttribute("aria-pressed", dunkel ? "true" : "false");
-      themenKnopf.textContent = dunkel ? "Helles Pergament" : "Dunkles Kontor";
-    }
+      beschrifte(themenKnopf, dunkel,
+                 dunkel ? "Helles Pergament einschalten" : "Dunkles Kontor einschalten");
+    };
 
     themenKnopf.addEventListener("click", function () {
       var neu = wirksamesThema() === "dunkel" ? "hell" : "dunkel";
@@ -48,11 +59,11 @@
   // Hier gibt es keine Systemvorgabe, also genuegt an/aus.
   var schriftKnopf = document.getElementById("schalter-schrift");
   if (schriftKnopf) {
-    function zeigeSchrift() {
+    var zeigeSchrift = function () {
       var lesbar = wurzel.getAttribute("data-schrift") === "lesbar";
-      schriftKnopf.setAttribute("aria-pressed", lesbar ? "true" : "false");
-      schriftKnopf.textContent = lesbar ? "Zierschrift" : "Gut lesbar";
-    }
+      beschrifte(schriftKnopf, lesbar,
+                 lesbar ? "Zierschrift einschalten" : "Gut lesbare Schrift einschalten");
+    };
 
     schriftKnopf.addEventListener("click", function () {
       if (wurzel.getAttribute("data-schrift") === "lesbar") {

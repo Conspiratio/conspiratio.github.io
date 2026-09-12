@@ -1,6 +1,15 @@
+{%- comment -%}
+Ein Meldungsanriss als ruhige Karte - dieselbe Form wie die hervorgehobene
+Meldung der Startseite, aber ohne Akzentstreifen und ohne Knopf.
+
+h3, nicht h2: Auf der Startseite steht darüber "Weitere Meldungen", im Archiv
+die Jahreszahl - beides h2. Die Meldung ist diesen untergeordnet.
+{%- endcomment -%}
 <article class="news-anriss">
-  <h2><a href="{{ include.meldung.url }}">{{ include.meldung.title }}</a></h2>
-  <p><time datetime="{{ include.meldung.date | date_to_xmlschema }}">{{ include.meldung.date | date: "%d.%m.%Y" }}</time></p>
-  <p>{{ include.meldung.excerpt | strip_html | strip_newlines | truncate: 280 }}</p>
-  <p><a href="{{ include.meldung.url }}">Weiterlesen</a></p>
+  <h3><a href="{{ include.meldung.url }}">{{ include.meldung.title }}</a></h3>
+  <p class="news-datum">
+    <time datetime="{{ include.meldung.date | date_to_xmlschema }}">{% include datum-lang.html datum=include.meldung.date %}</time>
+  </p>
+  <p class="news-text">{{ include.meldung.excerpt | strip_html | strip_newlines | truncate: 280 }}</p>
+  <p class="news-mehr"><a href="{{ include.meldung.url }}">Weiterlesen</a></p>
 </article>

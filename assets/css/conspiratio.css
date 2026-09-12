@@ -16,43 +16,49 @@
 @font-face { font-family: "Atkinson Hyperlegible"; src: url("/assets/schriften/atkinson-hyperlegible-700.woff2") format("woff2");
              font-weight: 700; font-display: swap; }
 
-/* ---------- Helles Thema: das Pergament ---------- */
+/* ---------- Helles Thema: Pergament, stark entsaettigt ---------- */
 :root {
-  --grund:          #efe3c8;
-  --grund-erhoben:  #f7eeda;
-  --schrift:        #2a1d0d;
-  --schrift-leise:  #5b4526;
+  --grund:          #f7f3e9;
+  --grund-erhoben:  #fdfbf5;
+  --schrift:        #2b2822;
+  --schrift-leise:  #5d574c;
   --akzent:         #8a5a12;
   --akzent-hell:    #6d4509;
-  --linie:          #c9b48a;
+  --linie:          #e2dccc;
 
   --schrift-zier:   "Grenze Gotisch", "Palatino Linotype", serif;
   --schrift-text:   "EB Garamond", Georgia, serif;
   --zeilenhoehe:    1.65;
   --buchstabenabstand: 0;
-  --spaltenbreite:  38rem;   /* rund 70 Zeichen */
+
+  /* Die Textspalte waechst mit dem Fenster, statt bei 38rem stehenzubleiben:
+     Auf FullHD und 4K wirkte die Seite sonst verloren. Die Obergrenze haelt
+     die Zeile bei rund 90 Zeichen - darueber wird das Zurueckspringen an den
+     Zeilenanfang muehsam. */
+  --spaltenbreite:  clamp(38rem, 50vw, 52rem);
+  --tafelbreite:    clamp(68rem, 92vw, 104rem);   /* Galerie und breite Blöcke */
 }
 
-/* ---------- Dunkles Thema: das Kontor bei Kerzenlicht ---------- */
+/* ---------- Dunkles Thema: warm, aber fast neutral ---------- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-thema="hell"]) {
-    --grund:         #14100b;
-    --grund-erhoben: #1f1810;
-    --schrift:       #ece0cb;
-    --schrift-leise: #b8a68b;
+    --grund:         #1b1a18;
+    --grund-erhoben: #252320;
+    --schrift:       #e9e6df;
+    --schrift-leise: #aba79f;
     --akzent:        #e0a84a;
     --akzent-hell:   #f2c477;
-    --linie:         #3d3122;
+    --linie:         #3a3733;
   }
 }
 :root[data-thema="dunkel"] {
-  --grund:         #14100b;
-  --grund-erhoben: #1f1810;
-  --schrift:       #ece0cb;
-  --schrift-leise: #b8a68b;
+  --grund:         #1b1a18;
+  --grund-erhoben: #252320;
+  --schrift:       #e9e6df;
+  --schrift-leise: #aba79f;
   --akzent:        #e0a84a;
   --akzent-hell:   #f2c477;
-  --linie:         #3d3122;
+  --linie:         #3a3733;
 }
 
 /* ---------- Gut lesbare Schrift ---------- */
@@ -71,7 +77,7 @@ body {
   background: var(--grund);
   color: var(--schrift);
   font-family: var(--schrift-text);
-  font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem);
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.35rem);
   line-height: var(--zeilenhoehe);
   letter-spacing: var(--buchstabenabstand);
 }
@@ -100,23 +106,63 @@ img { max-width: 100%; height: auto; }
 .textspalte { max-width: var(--spaltenbreite); margin: 0 auto; padding: 0 1.25rem 4rem; }
 
 /* ---------- Kopf ---------- */
-.kopf { text-align: center; padding: 1.5rem 1rem 0.5rem; }
+.kopf { position: relative; text-align: center; padding: 1.15rem 1rem 1.35rem; }
 .wortmarke {
+  /* baseline, nicht center: Das Siegel soll auf derselben Linie stehen wie das
+     "C", nicht in der Mitte einer Zeilenbox, die von den langen Ober- und
+     Unterlaengen der gebrochenen Schrift bestimmt wird. */
+  display: inline-flex; align-items: baseline; gap: 0.28em;
   font-size: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
   text-decoration: none; color: var(--schrift);
 }
 
-/* Der Holzbalken mit Fachwerkhaus, Kreuz, Hammer, Truhe, Schwert und Wagenrad
-   aus der alten Seite. Kein Hintergrundbild, sondern ein echtes: Gekachelt
-   zeigte er eine deutliche Naht (die Kanten weichen um 42 von 255 ab), und
-   beschneiden verbietet sich, weil die Symbole genau an den Raendern sitzen.
-   So skaliert er stattdessen mit - auf dem Telefon wird er schmaler. */
+/* Das rote Wachssiegel mit dem Fraktur-C, buendig zum Versal daneben.
+   Die Werte sind gemessen, nicht geschaetzt: Das "C" der Grenze Gotisch reicht
+   0,611 em ueber die Grundlinie und 0,014 em darunter (der uebliche Ueberschuss
+   runder Formen), zusammen 0,625 em. Atkinson Hyperlegible hat eine groessere
+   Versalhoehe, daher der eigene Wert beim Schriftschalter.
+   Die Grafik ist auf ihren sichtbaren Bereich beschnitten - mit dem
+   transparenten Rand des Originals waere die Ausrichtung um dessen Breite
+   daneben. */
+:root            { --versalhoehe: 0.625em; }
+:root[data-schrift="lesbar"] { --versalhoehe: 0.694em; }
+
+.siegel {
+  height: var(--versalhoehe);
+  width: auto;
+  flex: none;
+  /* align-items: baseline setzt die Unterkante auf die Grundlinie; diese
+     Verschiebung gibt ihr denselben Ueberschuss nach unten wie dem "C". */
+  transform: translateY(0.014em);
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.35));
+}
+
+/* Der Zierbalken, in Anlehnung an den Kopf der alten Seite: eine Holzleiste
+   ueber die volle Fensterbreite, darauf die Symbole des Spiels.
+
+   Die Leiste ist EINE durchgehend gekachelte Maserung (die Kachel stammt aus
+   dem glatten Mittelstueck des Originalbalkens und ist an sich selbst
+   gespiegelt, also nahtlos). Die Symbole sind eigene Bilder mit Rahmen und
+   liegen darauf - dadurch gibt es keinen Uebergang zwischen zwei Maserungen
+   mehr, den man sehen koennte. Genau der war am Originalbalken das Problem:
+   Er brachte seine eigene Maserung mit, die links und rechts sichtbar auf die
+   gekachelte stiess. */
 .zierbalken {
-  display: block;
-  width: 100%;
-  max-width: 68rem;
-  margin: 0 auto;
+  height: clamp(52px, 5vw, 96px);
+  background: url("/assets/bilder/holzleiste.webp") repeat-x center / auto 100%;
   border-block: 1px solid var(--linie);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.25rem, 4vw, 5rem);
+  overflow: hidden;
+}
+.zierbalken-symbol {
+  height: 74%;
+  width: auto;
+  flex: none;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.45));
 }
 :root[data-thema="dunkel"] .zierbalken { filter: brightness(0.72); }
 @media (prefers-color-scheme: dark) {
@@ -139,18 +185,44 @@ img { max-width: 100%; height: auto; }
   .hauptnavigation a { font-size: 1.15rem; }
 }
 
-/* ---------- Schalter ---------- */
+/* ---------- Schalter ----------
+   Oben rechts neben dem Titel statt als eigene Zeile unter der Navigation: Drei
+   Schalter rechtfertigen keine volle Bildschirmbreite. Beschriftet sind sie ueber
+   title und aria-label; sichtbar sind nur Symbole. */
 .schalter {
-  display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
-  padding: 0.6rem 0.5rem 0;
+  position: absolute; top: 0.75rem; right: 0.9rem;
+  display: flex; gap: 0.35rem; align-items: center;
 }
 .schalter button, .schalter a {
-  background: none; border: 1px solid var(--linie); color: var(--schrift-leise);
-  border-radius: 3px; padding: 0.3rem 0.7rem; cursor: pointer;
-  font: inherit; font-size: 0.9rem; line-height: 1.2; text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2.1rem; height: 2.1rem; padding: 0 0.45rem;
+  background: none; border: 1px solid var(--linie); border-radius: 4px;
+  color: var(--schrift-leise); cursor: pointer;
+  font: inherit; font-size: 0.85rem; line-height: 1; text-decoration: none;
 }
 .schalter button:hover, .schalter a:hover { color: var(--schrift); border-color: var(--akzent); }
 .schalter button[aria-pressed="true"] { color: var(--schrift); border-color: var(--akzent); }
+
+.schalter .ikon { width: 1.05rem; height: 1.05rem; }
+/* "Aa" erbt die aktive Schriftart und zeigt so selbst, was der Schalter tut. */
+.schalter .ikon-aa { font-family: var(--schrift-text); font-size: 1rem; }
+
+/* Sonne oder Mond - je nachdem, wohin der Klick fuehrt. Ueber CSS, damit das
+   Skript nur Attribute setzt und die SVG nicht ersetzen muss. */
+.ikon-hell { display: none; }
+:root[data-thema="dunkel"] .ikon-hell { display: block; }
+:root[data-thema="dunkel"] .ikon-dunkel { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-thema="hell"]) .ikon-hell { display: block; }
+  :root:not([data-thema="hell"]) .ikon-dunkel { display: none; }
+}
+
+/* Auf schmalen Schirmen wuerden die Schalter den Titel beruehren, also
+   stehen sie dort in einer eigenen, rechtsbuendigen Zeile darueber. */
+@media (max-width: 700px) {
+  .kopf { padding-top: 0.5rem; }
+  .schalter { position: static; justify-content: flex-end; padding: 0 0 0.4rem; }
+}
 
 /* ---------- Bausteine ---------- */
 .knopf {
@@ -167,15 +239,54 @@ img { max-width: 100%; height: auto; }
 .vorspann { font-size: 1.2em; }
 
 .galerie {
-  display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; list-style: none;
+  display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  max-width: var(--tafelbreite); margin: 0 auto; padding: 0 1.25rem; list-style: none;
 }
 .galerie figure { margin: 0; }
 .galerie figcaption { font-size: 0.9rem; color: var(--schrift-leise); }
 
-.news-anriss { border-top: 1px solid var(--linie); padding-top: 1rem; margin-top: 1.5rem; }
-.news-anriss h2 { margin-top: 0; }
-.news-anriss time { color: var(--schrift-leise); font-size: 0.9rem; }
+/* ---------- Meldungen ----------
+   Zwei Karten derselben Form: Die neueste Meldung traegt einen Akzentstreifen
+   und einen Knopf, alle uebrigen dieselbe Karte in ruhig. Beide stehen auf
+   Textbreite, damit die Kanten mit dem uebrigen Inhalt fluchten. */
+.neuigkeit { max-width: var(--spaltenbreite); margin: 2.5rem auto 0; padding: 0 1.25rem; }
+
+.neuigkeit-karte, .news-anriss {
+  display: grid; gap: 0.4rem;
+  background: var(--grund-erhoben);
+  border: 1px solid var(--linie);
+  border-radius: 4px;
+}
+.neuigkeit-karte h2, .news-anriss h3 { margin: 0; }
+.neuigkeit-karte h2 a, .news-anriss h3 a { color: var(--schrift); text-decoration: none; }
+.neuigkeit-karte h2 a:hover, .news-anriss h3 a:hover {
+  color: var(--akzent); text-decoration: underline;
+}
+.neuigkeit-datum, .news-datum { margin: 0; color: var(--schrift-leise); font-size: 0.92rem; }
+.neuigkeit-text, .news-text { margin: 0.3rem 0 0.4rem; }
+.news-mehr { margin: 0; }
+
+/* Die hervorgehobene: Akzentstreifen, mehr Luft, groessere Zeile. */
+.neuigkeit-karte {
+  border-top: 4px solid var(--akzent);
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+.neuigkeit-marke {
+  margin: 0;
+  font-family: var(--schrift-text);
+  font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--akzent);
+}
+.neuigkeit-karte h2 { font-size: clamp(1.6rem, 1.1rem + 2vw, 2.6rem); }
+.neuigkeit-text { font-size: 1.05em; }
+
+/* Die uebrigen: dieselbe Karte, nur leiser. */
+.news-anriss {
+  padding: clamp(1rem, 2vw, 1.4rem);
+  margin-top: 1rem;
+}
+.news-anriss h3 { font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem); }
+.news-anriss:hover { border-color: var(--akzent); }
 
 .hinweis {
   background: var(--grund-erhoben); border-left: 3px solid var(--akzent);
