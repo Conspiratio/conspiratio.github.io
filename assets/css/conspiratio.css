@@ -245,16 +245,30 @@ img { max-width: 100%; height: auto; }
 .galerie figure { margin: 0; }
 .galerie figcaption { font-size: 0.9rem; color: var(--schrift-leise); }
 
-/* Die neueste Meldung als abgesetzte Karte - der Blickfang der Startseite.
-   Der Akzentstreifen oben traegt die Aufmerksamkeit, ohne dass die Karte eine
-   eigene Farbe braeuchte, die in einem der beiden Themen schief laege. */
-.neuigkeit { max-width: var(--tafelbreite); margin: 2.5rem auto 0; padding: 0 1.25rem; }
-.neuigkeit-karte {
-  display: grid; gap: 0.45rem;
+/* ---------- Meldungen ----------
+   Zwei Karten derselben Form: Die neueste Meldung traegt einen Akzentstreifen
+   und einen Knopf, alle uebrigen dieselbe Karte in ruhig. Beide stehen auf
+   Textbreite, damit die Kanten mit dem uebrigen Inhalt fluchten. */
+.neuigkeit { max-width: var(--spaltenbreite); margin: 2.5rem auto 0; padding: 0 1.25rem; }
+
+.neuigkeit-karte, .news-anriss {
+  display: grid; gap: 0.4rem;
   background: var(--grund-erhoben);
   border: 1px solid var(--linie);
-  border-top: 4px solid var(--akzent);
   border-radius: 4px;
+}
+.neuigkeit-karte h2, .news-anriss h3 { margin: 0; }
+.neuigkeit-karte h2 a, .news-anriss h3 a { color: var(--schrift); text-decoration: none; }
+.neuigkeit-karte h2 a:hover, .news-anriss h3 a:hover {
+  color: var(--akzent); text-decoration: underline;
+}
+.neuigkeit-datum, .news-datum { margin: 0; color: var(--schrift-leise); font-size: 0.92rem; }
+.neuigkeit-text, .news-text { margin: 0.3rem 0 0.4rem; }
+.news-mehr { margin: 0; }
+
+/* Die hervorgehobene: Akzentstreifen, mehr Luft, groessere Zeile. */
+.neuigkeit-karte {
+  border-top: 4px solid var(--akzent);
   padding: clamp(1.25rem, 3vw, 2.25rem);
 }
 .neuigkeit-marke {
@@ -263,15 +277,16 @@ img { max-width: 100%; height: auto; }
   font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--akzent);
 }
-.neuigkeit-karte h2 { margin: 0; font-size: clamp(1.6rem, 1.1rem + 2vw, 2.6rem); }
-.neuigkeit-karte h2 a { color: var(--schrift); text-decoration: none; }
-.neuigkeit-karte h2 a:hover { color: var(--akzent); text-decoration: underline; }
-.neuigkeit-datum { margin: 0; color: var(--schrift-leise); font-size: 0.92rem; }
-.neuigkeit-text { margin: 0.35rem 0 0.5rem; font-size: 1.05em; }
+.neuigkeit-karte h2 { font-size: clamp(1.6rem, 1.1rem + 2vw, 2.6rem); }
+.neuigkeit-text { font-size: 1.05em; }
 
-.news-anriss { border-top: 1px solid var(--linie); padding-top: 1rem; margin-top: 1.5rem; }
-.news-anriss h2 { margin-top: 0; }
-.news-anriss time { color: var(--schrift-leise); font-size: 0.9rem; }
+/* Die uebrigen: dieselbe Karte, nur leiser. */
+.news-anriss {
+  padding: clamp(1rem, 2vw, 1.4rem);
+  margin-top: 1rem;
+}
+.news-anriss h3 { font-size: clamp(1.2rem, 1rem + 0.8vw, 1.6rem); }
+.news-anriss:hover { border-color: var(--akzent); }
 
 .hinweis {
   background: var(--grund-erhoben); border-left: 3px solid var(--akzent);
