@@ -16,15 +16,15 @@
 @font-face { font-family: "Atkinson Hyperlegible"; src: url("/assets/schriften/atkinson-hyperlegible-700.woff2") format("woff2");
              font-weight: 700; font-display: swap; }
 
-/* ---------- Helles Thema: das Pergament ---------- */
+/* ---------- Helles Thema: Pergament, stark entsaettigt ---------- */
 :root {
-  --grund:          #efe3c8;
-  --grund-erhoben:  #f7eeda;
-  --schrift:        #2a1d0d;
-  --schrift-leise:  #5b4526;
+  --grund:          #f7f3e9;
+  --grund-erhoben:  #fdfbf5;
+  --schrift:        #2b2822;
+  --schrift-leise:  #5d574c;
   --akzent:         #8a5a12;
   --akzent-hell:    #6d4509;
-  --linie:          #c9b48a;
+  --linie:          #e2dccc;
 
   --schrift-zier:   "Grenze Gotisch", "Palatino Linotype", serif;
   --schrift-text:   "EB Garamond", Georgia, serif;
@@ -39,26 +39,26 @@
   --tafelbreite:    clamp(68rem, 92vw, 104rem);   /* Galerie und breite Blöcke */
 }
 
-/* ---------- Dunkles Thema: das Kontor bei Kerzenlicht ---------- */
+/* ---------- Dunkles Thema: warm, aber fast neutral ---------- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-thema="hell"]) {
-    --grund:         #14100b;
-    --grund-erhoben: #1f1810;
-    --schrift:       #ece0cb;
-    --schrift-leise: #b8a68b;
+    --grund:         #1b1a18;
+    --grund-erhoben: #252320;
+    --schrift:       #e9e6df;
+    --schrift-leise: #aba79f;
     --akzent:        #e0a84a;
     --akzent-hell:   #f2c477;
-    --linie:         #3d3122;
+    --linie:         #3a3733;
   }
 }
 :root[data-thema="dunkel"] {
-  --grund:         #14100b;
-  --grund-erhoben: #1f1810;
-  --schrift:       #ece0cb;
-  --schrift-leise: #b8a68b;
+  --grund:         #1b1a18;
+  --grund-erhoben: #252320;
+  --schrift:       #e9e6df;
+  --schrift-leise: #aba79f;
   --akzent:        #e0a84a;
   --akzent-hell:   #f2c477;
-  --linie:         #3d3122;
+  --linie:         #3a3733;
 }
 
 /* ---------- Gut lesbare Schrift ---------- */
@@ -124,22 +124,32 @@ img { max-width: 100%; height: auto; }
   filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.35));
 }
 
-/* Der Holzbalken mit Fachwerkhaus, Kreuz, Hammer, Truhe, Schwert und Wagenrad
-   aus der alten Seite. Er laeuft ueber die volle Fensterbreite und besteht
-   dafuer aus zwei Lagen: die Symbolleiste mittig in ihrem eigenen Seitenver-
-   haeltnis, darunter eine gekachelte Holzleiste, die den Rest fuellt.
+/* Der Zierbalken, in Anlehnung an den Kopf der alten Seite: eine Holzleiste
+   ueber die volle Fensterbreite, darauf die Symbole des Spiels.
 
-   Warum nicht einfach das Originalbild kacheln: Seine Kanten weichen um 42 von
-   255 ab, die Naht waere deutlich sichtbar. Die Kachel stammt daher aus dem
-   glatten Mittelstueck und ist an sich selbst gespiegelt - damit ist sie
-   nahtlos (gemessen: Abweichung 0,0). Und einfach breitziehen verbietet sich,
-   weil die Symbole verzerrt wuerden. */
+   Die Leiste ist EINE durchgehend gekachelte Maserung (die Kachel stammt aus
+   dem glatten Mittelstueck des Originalbalkens und ist an sich selbst
+   gespiegelt, also nahtlos). Die Symbole sind eigene Bilder mit Rahmen und
+   liegen darauf - dadurch gibt es keinen Uebergang zwischen zwei Maserungen
+   mehr, den man sehen koennte. Genau der war am Originalbalken das Problem:
+   Er brachte seine eigene Maserung mit, die links und rechts sichtbar auf die
+   gekachelte stiess. */
 .zierbalken {
-  height: clamp(44px, 4.5vw, 88px);
-  background:
-    url("/assets/bilder/zierbalken.webp") no-repeat center / auto 100%,
-    url("/assets/bilder/holzleiste.webp") repeat-x center / auto 100%;
+  height: clamp(52px, 5vw, 96px);
+  background: url("/assets/bilder/holzleiste.webp") repeat-x center / auto 100%;
   border-block: 1px solid var(--linie);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.25rem, 4vw, 5rem);
+  overflow: hidden;
+}
+.zierbalken-symbol {
+  height: 74%;
+  width: auto;
+  flex: none;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.45));
 }
 :root[data-thema="dunkel"] .zierbalken { filter: brightness(0.72); }
 @media (prefers-color-scheme: dark) {

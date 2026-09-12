@@ -34,7 +34,18 @@
       <img class="siegel" src="/assets/bilder/logo-siegel.webp" alt=""
            width="180" height="180">Conspiratio</a>
   </header>
-  <div class="zierbalken" role="presentation"></div>
+  {%- comment -%}
+  Der Zierbalken: eine durchgehend gekachelte Holzleiste, auf der die sechs
+  Spielsymbole liegen - Handel, Finanzen, Werkstatt, Kirche, Gericht, Karawane.
+  Rein schmueckend, deshalb aria-hidden und leere alt-Texte.
+  {%- endcomment -%}
+  <div class="zierbalken" aria-hidden="true">
+    {%- assign symbole = "haus,truhe,werkstatt,kirche,justiz,karawane" | split: "," -%}
+    {%- for symbol in symbole -%}
+    <img class="zierbalken-symbol" src="/assets/bilder/symbol-{{ symbol }}.webp"
+         alt="" width="160" height="160">
+    {%- endfor -%}
+  </div>
   {%- include navigation.html -%}
   {%- include schalter.html -%}
   <main id="inhalt">
