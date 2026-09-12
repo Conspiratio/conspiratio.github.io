@@ -156,7 +156,7 @@ Layout sich nicht ändert.
 ## 5. Seiten und Navigation
 
 Kopfzeile: **Das Spiel · Bilder · Downloads · News · Handbuch ↗ · Mitmachen · Kontakt**, rechts
-daneben die Schalter für Thema und Schrift sowie `EN`. Fußzeile: Links, Impressum, GitHub, Lizenz,
+daneben die Schalter für Thema und Schrift sowie `EN`. Fußzeile: Links, Datenschutz, GitHub, Lizenz,
 Jahreszahl (aus `site.time`, also nie wieder von Hand). Das Team steht auf `/mitmachen/` und bekommt
 daher keinen eigenen Fußzeileneintrag.
 
@@ -172,13 +172,19 @@ daher keinen eigenen Fußzeileneintrag.
 | `/kontakt/` | Discord, Mail, Forum (neue Subdomain) | `kontakt.html` |
 | `/links/` | unverändert übernommen, über die Fußzeile erreichbar | `links.html` |
 | `/en/` | eine englische Seite: Was das Spiel ist, Download, GitHub, Discord | neu |
-| `/impressum/` | Anbieterkennzeichnung und knapper Datenschutzhinweis | neu |
+| `/datenschutz/` | was GitHub Pages beim Ausliefern verarbeitet und was die Seite selbst erhebt (nichts) | neu |
 
-**Zum Impressum:** Die Seite hat heute keins. Für eine private, nicht-kommerzielle Seite ist die
-Pflicht nach § 5 DDG strittig; da die Seite aber unter eigener Domain läuft und auf Discord und
-GitHub verweist, ist eine knappe Anbieterkennzeichnung plus ein Satz zur Datenverarbeitung (GitHub
-Pages protokolliert IP-Adressen) der ruhigere Weg. Die Seite wird angelegt, die Angaben steuert der
-Eigentümer bei.
+**Kein Impressum, nur Datenschutz.** Erwogen war zunächst eine Anbieterkennzeichnung nach § 5 DDG.
+Der Projekteigentümer hat entschieden, keine zu führen und wie bisher keine Anschrift zu
+hinterlegen: Das Projekt ist ein nicht-kommerzielles Open-Source-Fanprojekt ohne finanzielle Ziele,
+und die Pflicht greift in dieser Konstellation nach seiner Einschätzung nicht.
+
+Angelegt wird deshalb allein eine **Datenschutzerklärung**. Sie ist auch die inhaltlich
+begründetere der beiden: Der Wechsel zu GitHub Pages verlagert die Auslieferung zu einem
+US-Anbieter, der dabei IP-Adressen verarbeitet, und genau das erfährt der Besucher sonst nirgends.
+Sie hält außerdem fest, was die Seite *nicht* tut — keine Cookies, keine Zählung, keine fremden
+Inhalte, keine Formulare —, was nach dem Selbst-Ausliefern der Schriften eine sehr kurze und
+ungewöhnlich vollständige Aufzählung ist.
 
 **Inhaltliche Aktualisierungen**, die dabei anfallen: Die Kompatibilitätsangabe nennt heute
 Windows 7/8/10; sie wird je Client richtiggestellt (WinForms: .NET Framework 4.6.2; Godot: .NET 8).
@@ -334,7 +340,7 @@ unangetastet bleibt.
 3. Inhaltsseiten übernehmen und aktualisieren.
 4. News-System samt Übernahme des Bestands.
 5. Bilder aufbereiten, Galerie.
-6. Weiterleitungen, Impressum, englische Seite.
+6. Weiterleitungen, Datenschutzerklärung, englische Seite.
 7. Altdateien entfernen: `cons.css`, `OLDENGL.TTF`, `Jurist_aufsuchen.png`, die `_thumb`-Dateien und
    die nicht mehr eingebundenen Hintergrundbilder. Die alten `*.html` bleiben als
    Weiterleitungsstümpfe, die `Massenmail_*.txt` als Quellen der übernommenen Meldungen.
@@ -394,8 +400,8 @@ Es gibt hier keine Testsuite und braucht auch keine; geprüft wird gegen eine fe
 
 ## 12. Offene Punkte
 
-- **Impressumsangaben** muss der Eigentümer beisteuern (Name, Anschrift, E-Mail). Ohne sie wird die
-  Seite angelegt, aber nicht veröffentlicht.
+- ~~**Impressumsangaben** muss der Eigentümer beisteuern.~~ Entschieden: kein Impressum, nur eine
+  Datenschutzerklärung (siehe Kapitel 5). Damit hängt die Veröffentlichung nicht mehr daran.
 - **Der Godot-Release-Termin** ist offen. Die Downloadseite trägt bis dahin „erscheint demnächst"
   mit Verweis auf Repo und Changelog; der Release-Knopf ist vorbereitet und braucht dann nur einen
   Eintrag in `_data/downloads.yml`.

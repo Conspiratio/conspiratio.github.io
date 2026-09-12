@@ -21,12 +21,7 @@ Nach dem nächsten Push auf `main` läuft der Workflow und veröffentlicht unter
 Dort abnehmen: alle zehn Seiten, in hell und dunkel, mit Zier- und Lesbarkeitsschrift,
 in Telefonbreite und mit abgeschaltetem JavaScript.
 
-## 3. Impressum ausfüllen
-
-`impressum.md` trägt Platzhalter (`BITTE-AUSFUELLEN-NAME`, `BITTE-AUSFUELLEN-ANSCHRIFT`).
-**Vor** der Domainumstellung ersetzen.
-
-## 4. Apex auf GitHub umstellen
+## 3. Apex auf GitHub umstellen
 
 Beim DNS-Anbieter eintragen:
 
@@ -45,14 +40,14 @@ Beim DNS-Anbieter eintragen:
 Dann im Repo eine Datei `CNAME` mit dem einzigen Inhalt `conspiratio.net` anlegen und
 pushen (oder in `Settings → Pages → Custom domain` eintragen, was dieselbe Datei erzeugt).
 
-## 5. HTTPS erzwingen — erst danach
+## 4. HTTPS erzwingen — erst danach
 
 GitHub stellt das Zertifikat selbst aus (Let's Encrypt). Das dauert bis zu 24 Stunden.
 
 **„Enforce HTTPS" erst anhaken, wenn GitHub das Zertifikat ausgestellt hat.** Vorher
 gesetzt, ist die Seite in der Zwischenzeit nicht erreichbar.
 
-## 6. Nachkontrolle
+## 5. Nachkontrolle
 
 - `https://conspiratio.net` und `https://www.conspiratio.net` erreichbar, gültiges Zertifikat.
 - `https://conspiratio.net/geschichte.html` landet auf `/spiel/` — ebenso die fünf anderen

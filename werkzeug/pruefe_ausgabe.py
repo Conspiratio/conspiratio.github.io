@@ -260,7 +260,7 @@ def das_archiv_reicht_bis_2018_zurueck() -> None:
 ERWARTETE_SEITEN = [
     "index.html", "spiel/index.html", "downloads/index.html", "bilder/index.html",
     "news/index.html", "mitmachen/index.html", "kontakt/index.html", "links/index.html",
-    "impressum/index.html", "en/index.html",
+    "datenschutz/index.html", "en/index.html",
 ]
 
 
@@ -276,6 +276,17 @@ def die_startseite_zeigt_die_neuesten_meldungen() -> None:
     pruefe(text.count('class="news-anriss"') == 3,
            "Startseite: es stehen nicht genau drei News-Anrisse darauf")
     pruefe("/downloads/" in text, "Startseite: kein Weg zu den Downloads")
+
+
+@pruefung
+def keine_platzhalter_in_der_ausgabe() -> None:
+    """Waehrend des Aufbaus standen Platzhalter auf halbfertigen Seiten.
+    Keiner davon darf je veroeffentlicht werden."""
+    for seite in seiten():
+        text = seite.read_text(encoding="utf-8")
+        pfad = seite.relative_to(SITE)
+        for verraeter in ("BITTE-AUSFUELLEN", "Platzhalter", "TODO", "Lorem ipsum"):
+            pruefe(verraeter not in text, f"{pfad}: enthaelt den Platzhalter '{verraeter}'")
 
 
 @pruefung

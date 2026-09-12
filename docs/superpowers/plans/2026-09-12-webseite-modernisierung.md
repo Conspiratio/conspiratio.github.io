@@ -19,6 +19,12 @@ Python 3.11 (Prüfskript, Bildaufbereitung mit Pillow), GitHub Actions, lychee.
 
 ## Global Constraints
 
+> **Nachtrag nach der Umsetzung:** Aus `/impressum/` ist `/datenschutz/` geworden. Der
+> Projekteigentümer führt bewusst kein Impressum und hinterlegt keine Anschrift — ein
+> nicht-kommerzielles Open-Source-Fanprojekt. Wo dieser Plan unten „Impressum" sagt, ist die
+> Datenschutzerklärung gemeint; sie enthält keine Platzhalter und blockiert die
+> Veröffentlichung daher nicht. Siehe Kapitel 5 des Spec.
+
 Diese Vorgaben gelten für **jede** Aufgabe; sie werden nicht je Aufgabe wiederholt.
 
 - **Repo:** `Conspiratio/conspiratio.github.io`, Arbeitszweig `feature/pages-neubau`, Zielzweig `main`.
