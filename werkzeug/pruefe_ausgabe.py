@@ -318,6 +318,47 @@ def die_systemvoraussetzungen_sind_aktuell() -> None:
            "Downloadseite: nennt Windows 11 nicht - die alte Seite hoerte bei Windows 10 auf")
 
 
+@pruefung
+def jedes_bild_hat_alt_und_masse() -> None:
+    muster = re.compile(r"<img\b[^>]*>", re.IGNORECASE)
+    for seite in seiten():
+        text = seite.read_text(encoding="utf-8")
+        if ist_weiterleitung(text):
+            continue
+        pfad = seite.relative_to(SITE)
+        for treffer in muster.findall(text):
+            pruefe("alt=" in treffer, f"{pfad}: <img> ohne alt: {treffer[:90]}")
+            pruefe("width=" in treffer and "height=" in treffer,
+                   f"{pfad}: <img> ohne width/height: {treffer[:90]}")
+
+
+@pruefung
+def die_galerie_trennt_die_beiden_clients() -> None:
+    text = lies("bilder/index.html")
+    pruefe("Godot" in text and "WinForms" in text,
+           "Bilderseite: die beiden Clients sind nicht getrennt ueberschrieben")
+    if "Godot" in text and "WinForms" in text:
+        pruefe(text.index("Godot") < text.index("WinForms"),
+               "Bilderseite: der Godot-Client steht nicht zuerst")
+
+
+@pruefung
+def alle_oertlichen_verweise_zeigen_auf_vorhandene_dateien() -> None:
+    """Interner Linkpruefer - ersetzt lychee fuer alles, was im Repo liegt.
+
+    Faengt genau den Fehler, den der Git-Verlauf zweimal zeigt: einen Link, der
+    ins Leere zeigt, weil eine Datei umbenannt oder vertippt wurde.
+    """
+    muster = re.compile(r'(?:href|src)="(/[^"#?]*)"')
+    for seite in seiten():
+        text = seite.read_text(encoding="utf-8")
+        pfad = seite.relative_to(SITE)
+        for ziel in sorted(set(muster.findall(text))):
+            kandidat = SITE / ziel.lstrip("/")
+            ok = kandidat.is_file() or (kandidat / "index.html").is_file()
+            pruefe(ok, f"{pfad}: toter interner Verweis auf {ziel}")
+
+
 def main() -> int:
     for funktion in PRUEFUNGEN:
         funktion()
