@@ -25,10 +25,16 @@
 <body>
   <a class="zum-inhalt" href="#inhalt">Zum Inhalt springen</a>
   <header class="kopf">
-    <a class="wortmarke" href="/">Conspiratio</a>
+    <a class="wortmarke" href="/">
+      {%- comment -%}
+      Das Siegel lag bisher nur als Favicon im Repo. alt="" ist richtig: Der
+      Name steht direkt daneben, eine Wiederholung waere fuer Screenreader nur
+      Laerm.
+      {%- endcomment -%}
+      <img class="siegel" src="/assets/bilder/logo-siegel.webp" alt=""
+           width="180" height="180">Conspiratio</a>
   </header>
-  <img class="zierbalken" src="/assets/bilder/zierbalken.webp" alt=""
-       width="1000" height="88">
+  <div class="zierbalken" role="presentation"></div>
   {%- include navigation.html -%}
   {%- include schalter.html -%}
   <main id="inhalt">

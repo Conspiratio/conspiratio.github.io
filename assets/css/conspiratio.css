@@ -30,7 +30,13 @@
   --schrift-text:   "EB Garamond", Georgia, serif;
   --zeilenhoehe:    1.65;
   --buchstabenabstand: 0;
-  --spaltenbreite:  38rem;   /* rund 70 Zeichen */
+
+  /* Die Textspalte waechst mit dem Fenster, statt bei 38rem stehenzubleiben:
+     Auf FullHD und 4K wirkte die Seite sonst verloren. Die Obergrenze haelt
+     die Zeile bei rund 90 Zeichen - darueber wird das Zurueckspringen an den
+     Zeilenanfang muehsam. */
+  --spaltenbreite:  clamp(38rem, 50vw, 52rem);
+  --tafelbreite:    clamp(68rem, 92vw, 104rem);   /* Galerie und breite Blöcke */
 }
 
 /* ---------- Dunkles Thema: das Kontor bei Kerzenlicht ---------- */
@@ -71,7 +77,7 @@ body {
   background: var(--grund);
   color: var(--schrift);
   font-family: var(--schrift-text);
-  font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem);
+  font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.35rem);
   line-height: var(--zeilenhoehe);
   letter-spacing: var(--buchstabenabstand);
 }
@@ -102,20 +108,37 @@ img { max-width: 100%; height: auto; }
 /* ---------- Kopf ---------- */
 .kopf { text-align: center; padding: 1.5rem 1rem 0.5rem; }
 .wortmarke {
+  display: inline-flex; align-items: center; gap: 0.3em;
   font-size: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
   text-decoration: none; color: var(--schrift);
 }
 
+/* Das rote Wachssiegel mit dem Fraktur-C. Es waechst mit der Wortmarke (em,
+   nicht px) und traegt einen weichen Schatten, damit es auf hellem wie auf
+   dunklem Grund plastisch bleibt - ohne ihn verschwindet der dunkelrote Rand
+   im dunklen Thema fast. */
+.siegel {
+  height: 0.92em;
+  width: auto;
+  flex: none;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.35));
+}
+
 /* Der Holzbalken mit Fachwerkhaus, Kreuz, Hammer, Truhe, Schwert und Wagenrad
-   aus der alten Seite. Kein Hintergrundbild, sondern ein echtes: Gekachelt
-   zeigte er eine deutliche Naht (die Kanten weichen um 42 von 255 ab), und
-   beschneiden verbietet sich, weil die Symbole genau an den Raendern sitzen.
-   So skaliert er stattdessen mit - auf dem Telefon wird er schmaler. */
+   aus der alten Seite. Er laeuft ueber die volle Fensterbreite und besteht
+   dafuer aus zwei Lagen: die Symbolleiste mittig in ihrem eigenen Seitenver-
+   haeltnis, darunter eine gekachelte Holzleiste, die den Rest fuellt.
+
+   Warum nicht einfach das Originalbild kacheln: Seine Kanten weichen um 42 von
+   255 ab, die Naht waere deutlich sichtbar. Die Kachel stammt daher aus dem
+   glatten Mittelstueck und ist an sich selbst gespiegelt - damit ist sie
+   nahtlos (gemessen: Abweichung 0,0). Und einfach breitziehen verbietet sich,
+   weil die Symbole verzerrt wuerden. */
 .zierbalken {
-  display: block;
-  width: 100%;
-  max-width: 68rem;
-  margin: 0 auto;
+  height: clamp(44px, 4.5vw, 88px);
+  background:
+    url("/assets/bilder/zierbalken.webp") no-repeat center / auto 100%,
+    url("/assets/bilder/holzleiste.webp") repeat-x center / auto 100%;
   border-block: 1px solid var(--linie);
 }
 :root[data-thema="dunkel"] .zierbalken { filter: brightness(0.72); }
@@ -167,8 +190,8 @@ img { max-width: 100%; height: auto; }
 .vorspann { font-size: 1.2em; }
 
 .galerie {
-  display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; list-style: none;
+  display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  max-width: var(--tafelbreite); margin: 0 auto; padding: 0 1.25rem; list-style: none;
 }
 .galerie figure { margin: 0; }
 .galerie figcaption { font-size: 0.9rem; color: var(--schrift-leise); }
