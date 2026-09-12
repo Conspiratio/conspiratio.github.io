@@ -5,17 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {%- seo -%}
   <link rel="icon" href="/assets/bilder/icon.png">
+  <script>
+    // Muss laufen, bevor der Browser zeichnet - sonst blitzt beim Laden
+    // kurz das falsche Thema auf.
+    (function () {
+      try {
+        var t = localStorage.getItem("conspiratio-thema");
+        if (t) { document.documentElement.setAttribute("data-thema", t); }
+        var s = localStorage.getItem("conspiratio-schrift");
+        if (s) { document.documentElement.setAttribute("data-schrift", s); }
+      } catch (e) { /* privates Fenster: Voreinstellung gilt */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="/assets/css/conspiratio.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+        href="/assets/schriften/eb-garamond-400.woff2">
+  <link rel="alternate" type="application/atom+xml" title="Conspiratio-News" href="/feed.xml">
 </head>
 <body>
   <a class="zum-inhalt" href="#inhalt">Zum Inhalt springen</a>
   <header class="kopf">
     <a class="wortmarke" href="/">Conspiratio</a>
   </header>
-  <div class="zierbalken" role="presentation"></div>
+  <img class="zierbalken" src="/assets/bilder/zierbalken.webp" alt=""
+       width="1000" height="88">
   {%- include navigation.html -%}
+  {%- include schalter.html -%}
   <main id="inhalt">
     {{ content }}
   </main>
   {%- include fuss.html -%}
+  <script src="/assets/js/einstellungen.js" defer></script>
 </body>
 </html>
