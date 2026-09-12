@@ -25,6 +25,7 @@
 <body>
   <a class="zum-inhalt" href="#inhalt">Zum Inhalt springen</a>
   <header class="kopf">
+    {%- include schalter.html -%}
     <a class="wortmarke" href="/">
       {%- comment -%}
       Das Siegel lag bisher nur als Favicon im Repo. alt="" ist richtig: Der
@@ -47,7 +48,6 @@
     {%- endfor -%}
   </div>
   {%- include navigation.html -%}
-  {%- include schalter.html -%}
   <main id="inhalt">
     {{ content }}
   </main>

@@ -203,10 +203,29 @@ def das_thema_steht_vor_dem_ersten_zeichnen_fest() -> None:
 
 @pruefung
 def die_schalter_sind_bedienbar() -> None:
-    text = lies("index.html")
-    pruefe('id="schalter-thema"' in text, "index.html: Themenschalter fehlt")
-    pruefe('id="schalter-schrift"' in text, "index.html: Schriftschalter fehlt")
-    pruefe("aria-pressed" in text, "index.html: Schalter ohne aria-pressed")
+    """Die Schalter tragen keinen sichtbaren Text mehr, nur Symbole. Damit ist
+    aria-label die einzige Beschriftung - sie darf nicht verlorengehen."""
+    for seite in seiten():
+        text = seite.read_text(encoding="utf-8")
+        if ist_weiterleitung(text):
+            continue
+        pfad = seite.relative_to(SITE)
+        for kennung in ("schalter-thema", "schalter-schrift"):
+            stelle = text.find(f'id="{kennung}"')
+            pruefe(stelle != -1, f"{pfad}: {kennung} fehlt")
+            if stelle == -1:
+                continue
+            # Das oeffnende <button ...>-Tag um die Kennung herum betrachten.
+            anfang = text.rfind("<button", 0, stelle)
+            tag = text[anfang:text.find(">", stelle) + 1]
+            for pflicht in ("aria-pressed", "aria-label", "title"):
+                pruefe(pflicht in tag, f"{pfad}: {kennung} ohne {pflicht}")
+
+    # Beide Symbole des Themenschalters muessen im Dokument stehen; welches
+    # sichtbar ist, entscheidet das Stylesheet.
+    start = lies("index.html")
+    for klasse in ("ikon-dunkel", "ikon-hell"):
+        pruefe(klasse in start, f"index.html: Symbol {klasse} fehlt")
 
 
 def meldungen() -> list[pathlib.Path]:

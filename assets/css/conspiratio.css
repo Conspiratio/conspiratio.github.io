@@ -106,7 +106,7 @@ img { max-width: 100%; height: auto; }
 .textspalte { max-width: var(--spaltenbreite); margin: 0 auto; padding: 0 1.25rem 4rem; }
 
 /* ---------- Kopf ---------- */
-.kopf { text-align: center; padding: 1.5rem 1rem 0.5rem; }
+.kopf { position: relative; text-align: center; padding: 1.5rem 1rem 0.5rem; }
 .wortmarke {
   display: inline-flex; align-items: center; gap: 0.3em;
   font-size: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
@@ -172,18 +172,44 @@ img { max-width: 100%; height: auto; }
   .hauptnavigation a { font-size: 1.15rem; }
 }
 
-/* ---------- Schalter ---------- */
+/* ---------- Schalter ----------
+   Oben rechts neben dem Titel statt als eigene Zeile unter der Navigation: Drei
+   Schalter rechtfertigen keine volle Bildschirmbreite. Beschriftet sind sie ueber
+   title und aria-label; sichtbar sind nur Symbole. */
 .schalter {
-  display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
-  padding: 0.6rem 0.5rem 0;
+  position: absolute; top: 0.75rem; right: 0.9rem;
+  display: flex; gap: 0.35rem; align-items: center;
 }
 .schalter button, .schalter a {
-  background: none; border: 1px solid var(--linie); color: var(--schrift-leise);
-  border-radius: 3px; padding: 0.3rem 0.7rem; cursor: pointer;
-  font: inherit; font-size: 0.9rem; line-height: 1.2; text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2.1rem; height: 2.1rem; padding: 0 0.45rem;
+  background: none; border: 1px solid var(--linie); border-radius: 4px;
+  color: var(--schrift-leise); cursor: pointer;
+  font: inherit; font-size: 0.85rem; line-height: 1; text-decoration: none;
 }
 .schalter button:hover, .schalter a:hover { color: var(--schrift); border-color: var(--akzent); }
 .schalter button[aria-pressed="true"] { color: var(--schrift); border-color: var(--akzent); }
+
+.schalter .ikon { width: 1.05rem; height: 1.05rem; }
+/* "Aa" erbt die aktive Schriftart und zeigt so selbst, was der Schalter tut. */
+.schalter .ikon-aa { font-family: var(--schrift-text); font-size: 1rem; }
+
+/* Sonne oder Mond - je nachdem, wohin der Klick fuehrt. Ueber CSS, damit das
+   Skript nur Attribute setzt und die SVG nicht ersetzen muss. */
+.ikon-hell { display: none; }
+:root[data-thema="dunkel"] .ikon-hell { display: block; }
+:root[data-thema="dunkel"] .ikon-dunkel { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-thema="hell"]) .ikon-hell { display: block; }
+  :root:not([data-thema="hell"]) .ikon-dunkel { display: none; }
+}
+
+/* Auf schmalen Schirmen wuerden die Schalter den Titel beruehren, also
+   stehen sie dort in einer eigenen, rechtsbuendigen Zeile darueber. */
+@media (max-width: 700px) {
+  .kopf { padding-top: 0.5rem; }
+  .schalter { position: static; justify-content: flex-end; padding: 0 0 0.4rem; }
+}
 
 /* ---------- Bausteine ---------- */
 .knopf {
