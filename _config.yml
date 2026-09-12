@@ -1,4 +1,8 @@
 title: Conspiratio
+# Kurzfassung fuer den Browser-Tab. Ohne sie haengt jekyll-seo-tag auf der
+# Startseite die ganze description an den Titel - das ergibt einen Tab-Titel
+# ueber drei Zeilen.
+tagline: Freie Wirtschaftssimulation der frühen Neuzeit
 description: >-
   Conspiratio ist eine freie Wirtschaftssimulation der frühen Neuzeit: Handel, Ämter,
   Intrigen und eine Dynastie, die den eigenen Tod überdauern muss.

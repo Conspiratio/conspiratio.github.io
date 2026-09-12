@@ -33,6 +33,17 @@ jobs:
           JEKYLL_ENV: production
       - name: Ausgabe prüfen
         run: python werkzeug/pruefe_ausgabe.py
+      - name: Verweise prüfen
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress --accept 200,206,429
+            --exclude-path _site/assets
+            '_site/**/*.html'
+          # Absichtlich nicht fehlschlagend: Fremde Seiten verschwinden, ohne
+          # dass die eigene Veröffentlichung daran scheitern soll. Die internen
+          # Verweise prüft pruefe_ausgabe.py, und das schlägt sehr wohl fehl.
+          fail: false
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

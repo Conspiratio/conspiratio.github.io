@@ -1,5 +1,5 @@
 ---
-title: "Conspiratio — a free trading and intrigue simulation"
+title: "In English"
 permalink: /en/
 lang: en
 ---

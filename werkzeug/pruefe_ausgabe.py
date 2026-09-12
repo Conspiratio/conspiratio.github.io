@@ -385,6 +385,23 @@ def die_altlasten_sind_verschwunden() -> None:
     pruefe(not list(SITE.rglob("*_thumb.jpg")), "es werden noch _thumb-Dateien ausgeliefert")
 
 
+@pruefung
+def die_seitentitel_bleiben_kurz() -> None:
+    """Ein Tab-Titel ueber 70 Zeichen ist in keiner Tableiste mehr zu lesen."""
+    muster = re.compile(r"<title>(.*?)</title>", re.IGNORECASE | re.DOTALL)
+    for seite in seiten():
+        text = seite.read_text(encoding="utf-8")
+        if ist_weiterleitung(text):
+            continue
+        treffer = muster.search(text)
+        pfad = seite.relative_to(SITE)
+        pruefe(treffer is not None, f"{pfad}: kein <title>")
+        if treffer:
+            titel = treffer.group(1).strip()
+            pruefe(len(titel) <= 70,
+                   f"{pfad}: Titel ist {len(titel)} Zeichen lang: {titel[:60]}...")
+
+
 def main() -> int:
     for funktion in PRUEFUNGEN:
         funktion()

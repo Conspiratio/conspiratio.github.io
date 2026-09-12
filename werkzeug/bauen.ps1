@@ -20,10 +20,15 @@ $befehl = if ($Vorschau) {
     "bundle install --quiet && bundle exec jekyll build"
 }
 
+# Den Port nur fuer die Vorschau veroeffentlichen. Sonst scheitert jeder Build,
+# solange eine Vorschau laeuft ("port is already allocated") - und waehrend der
+# Arbeit laeuft meistens eine.
+$portargumente = if ($Vorschau) { @("-p", "4000:4000") } else { @() }
+
 docker run --rm `
     -v "${wurzel}:/srv" -w /srv `
     -v conspiratio-gems:/usr/local/bundle `
-    -p 4000:4000 `
+    @portargumente `
     ruby:3.3 bash -lc $befehl
 
 if ($LASTEXITCODE -ne 0) { throw "Build fehlgeschlagen (Exit $LASTEXITCODE)" }
