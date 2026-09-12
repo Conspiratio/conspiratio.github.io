@@ -1,0 +1,15 @@
+- titel: Das Spiel
+  ziel: /spiel/
+- titel: Bilder
+  ziel: /bilder/
+- titel: Downloads
+  ziel: /downloads/
+- titel: News
+  ziel: /news/
+- titel: Handbuch
+  ziel: https://conspiratio.github.io/Conspiratio.Wiki/
+  extern: true
+- titel: Mitmachen
+  ziel: /mitmachen/
+- titel: Kontakt
+  ziel: /kontakt/

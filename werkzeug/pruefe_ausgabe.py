@@ -7,6 +7,9 @@ Exit 0 = alles in Ordnung, Exit 1 = mindestens eine Zusage verletzt.
 Dieses Skript tritt an die Stelle einer Testsuite, die es fuer eine statische
 Seite sonst nicht gaebe. Jede Aufgabe des Implementierungsplans ergaenzt hier
 ihre Zusagen, bevor sie sie erfuellt.
+
+Die Fehlermeldungen sind bewusst ASCII: Die Windows-Konsole zerlegt Umlaute,
+und wer den Lauf nach einem Wort durchsuchen will, soll das tun koennen.
 """
 from __future__ import annotations
 
@@ -67,6 +70,32 @@ def jede_seite_nennt_ihre_sprache() -> None:
         pfad = seite.relative_to(SITE)
         erwartet = 'lang="en"' if str(pfad).startswith("en") else 'lang="de"'
         pruefe(erwartet in text, f"{pfad}: erwartet {erwartet} im <html>-Tag")
+
+
+@pruefung
+def jede_seite_traegt_navigation_und_fuss() -> None:
+    for seite in seiten():
+        text = seite.read_text(encoding="utf-8")
+        if ist_weiterleitung(text):
+            continue
+        pfad = seite.relative_to(SITE)
+        pruefe('class="hauptnavigation"' in text, f"{pfad}: Hauptnavigation fehlt")
+        pruefe('class="fuss"' in text, f"{pfad}: Fusszeile fehlt")
+
+
+@pruefung
+def die_navigation_markiert_die_aktuelle_seite() -> None:
+    text = lies("spiel/index.html")
+    pruefe('aria-current="page"' in text,
+           "spiel/index.html: aktiver Menuepunkt ist nicht als aria-current markiert")
+
+
+@pruefung
+def die_jahreszahl_kommt_aus_der_konfiguration() -> None:
+    # Der Fuss nennt das laufende Jahr; es darf in keiner Inhaltsdatei hart stehen.
+    text = lies("index.html")
+    pruefe(str(datetime.date.today().year) in text,
+           "index.html: das laufende Jahr steht nicht im Fuss")
 
 
 def main() -> int:

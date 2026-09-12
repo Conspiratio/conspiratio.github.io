@@ -7,8 +7,15 @@
   <link rel="icon" href="/assets/bilder/icon.png">
 </head>
 <body>
-  <main>
+  <a class="zum-inhalt" href="#inhalt">Zum Inhalt springen</a>
+  <header class="kopf">
+    <a class="wortmarke" href="/">Conspiratio</a>
+  </header>
+  <div class="zierbalken" role="presentation"></div>
+  {%- include navigation.html -%}
+  <main id="inhalt">
     {{ content }}
   </main>
+  {%- include fuss.html -%}
 </body>
 </html>

@@ -1,0 +1,20 @@
+<nav class="hauptnavigation" aria-label="Hauptnavigation">
+  <details class="navigation-huelle">
+    <summary class="navigation-knopf">Menü</summary>
+    <ul>
+      {%- for eintrag in site.data.navigation -%}
+        {%- assign aktiv = false -%}
+        {%- if page.url contains eintrag.ziel and eintrag.extern != true -%}
+          {%- assign aktiv = true -%}
+        {%- endif -%}
+        <li>
+          <a href="{{ eintrag.ziel }}"
+             {% if aktiv %}aria-current="page"{% endif %}
+             {% if eintrag.extern %}target="_blank" rel="noopener"{% endif %}>
+            {{ eintrag.titel }}{% if eintrag.extern %} <span aria-hidden="true">↗</span>{% endif %}
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </details>
+</nav>
