@@ -14,6 +14,15 @@ Alle sichtbaren Texte, eigenen Dateinamen, Kommentare und Commit-Nachrichten sin
 Ausgenommen sind Schnittstellenbegriffe des Frameworks (`_posts`, `_data`, `_layouts`, `title`,
 `date`, `excerpt`, `permalink`, `redirect_from`) — Jekyll liest sie so und nur so.
 
+**Angeredet wird mit „Ihr", nicht mit „Sie"** — durchgehend, auch auf Datenschutz- und
+Downloadseite. Das entspricht dem Ton des Spiels.
+
+**Keine Zahl ohne Beleg.** Auf der Mitmachen-Seite stand einmal, die Grafiken seien „zwanzig Jahre
+alt" — frei erfunden, weil es plausibel klang. Belegen ließ sich nichts: Die Bilddateien tragen
+keine Zeitangaben, dieses Repo reicht bis 2022 zurück, das WinForms-Repo bis 2020, und der früheste
+Fund im Internet Archive (`header4.png`, Oktober 2017) datiert nur die Webseite. Im Zweifel gar
+keine Zahl.
+
 Schwesterrepos: `Conspiratio.Godot` (der neue Client), `Conspiratio.WinForms` (der bisherige, dort
 liegen die Releases), `Conspiratio.Wiki` (Spielerdokumentation).
 

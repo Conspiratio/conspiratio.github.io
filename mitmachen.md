@@ -10,8 +10,8 @@ allen Bereichen gesucht — am dringendsten in diesen:
 
 - **Spielen und berichten.** Was sich unrund anfühlt, was unklar ist, was fehlt. Das ist die
   Hilfe, die am meisten bringt und am wenigsten kostet.
-- **Grafik.** Der neue Client übernimmt die Bilder des alten; vieles davon ist zwanzig Jahre
-  alt.
+- **Grafik.** Der neue Client übernimmt die Bilder des alten; vieles davon stammt aus den
+  Anfangsjahren des Projekts.
 - **Übersetzung.** Das Spiel gibt es bisher nur auf Deutsch.
 - **Programmierung.** C# und Godot 4.7. Die Spielregeln liegen in einer eigenen Bibliothek mit
   Tests, der Client setzt nur die Oberfläche darauf.
