@@ -1,0 +1,16 @@
+{%- comment -%}
+Die Beschriftungen stehen hier im Zustand "noch nichts gewaehlt". Sobald
+einstellungen.js laeuft, setzt es sie passend zum wirksamen Thema. Ohne
+JavaScript bleiben die Knoepfe sichtbar, aber wirkungslos - deshalb tragen sie
+dann auch keine irrefuehrende Beschriftung, sondern die neutrale Ansage dessen,
+was sie anbieten wuerden.
+{%- endcomment -%}
+<div class="schalter">
+  <button type="button" id="schalter-thema" aria-pressed="false">Dunkles Kontor</button>
+  <button type="button" id="schalter-schrift" aria-pressed="false">Gut lesbar</button>
+  {%- if page.lang == "en" %}
+  <a href="/" hreflang="de">DE</a>
+  {%- else %}
+  <a href="/en/" hreflang="en">EN</a>
+  {%- endif %}
+</div>

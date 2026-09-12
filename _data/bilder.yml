@@ -1,0 +1,80 @@
+# Erzeugt von werkzeug/bilder_aufbereiten.py - nicht von Hand pflegen.
+# Alternativtexte stehen in jenem Skript.
+
+- datei: godot-kontor.webp
+  alt: "Das Kontor: der Schreibtisch, von dem aus alle Bereiche eines Zuges angesteuert werden"
+  client: godot
+  breite: 1000
+  hoehe: 562
+
+- datei: godot-weltkarte.webp
+  alt: "Die Weltkarte mit den vierzehn Städten zwischen Wattern, Meadowvalley und Redcoast"
+  client: godot
+  breite: 1000
+  hoehe: 562
+
+- datei: godot-schreibstube.webp
+  alt: "Die Schreibstube: Kreditbuch, Gesetze und Akten auf dem Tisch"
+  client: godot
+  breite: 1000
+  hoehe: 562
+
+- datei: godot-hinterzimmer.webp
+  alt: "Das Hinterzimmer: Gift, Würfel, eine Bombe und ein versiegelter Brief im Kerzenlicht"
+  client: godot
+  breite: 1000
+  hoehe: 562
+
+- datei: godot-gesetze.webp
+  alt: "Die Strafgesetze einer Stadt - Spionage verboten, Anschwärzen erlaubt"
+  client: godot
+  breite: 1000
+  hoehe: 562
+
+- datei: winforms-kontor.webp
+  alt: "Das Kontor im bisherigen Client"
+  client: winforms
+  breite: 1000
+  hoehe: 562
+
+- datei: winforms-schreibstube-gesetze.webp
+  alt: "Die Gesetzestafel in der Schreibstube"
+  client: winforms
+  breite: 1000
+  hoehe: 562
+
+- datei: winforms-amtsuebersicht.webp
+  alt: "Die Ämterübersicht mit Amtsinhabern und Bewerbungen"
+  client: winforms
+  breite: 1000
+  hoehe: 562
+
+- datei: winforms-beziehungen-kontrahenten.webp
+  alt: "Die Beziehungen zu den Kontrahenten"
+  client: winforms
+  breite: 1000
+  hoehe: 562
+
+- datei: winforms-kirche.webp
+  alt: "Die Kirche"
+  client: winforms
+  breite: 1000
+  hoehe: 562
+
+- datei: winforms-produktion.webp
+  alt: "Die Produktion einer Werkstätte"
+  client: winforms
+  breite: 1000
+  hoehe: 562
+
+- datei: winforms-stadtinfos.webp
+  alt: "Die Stadtinformationen mit Lagerbeständen und Preisen"
+  client: winforms
+  breite: 1000
+  hoehe: 562
+
+- datei: winforms-zollburg-verwalten.webp
+  alt: "Eine Zollburg verwalten"
+  client: winforms
+  breite: 1000
+  hoehe: 562

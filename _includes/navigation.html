@@ -1,0 +1,25 @@
+{%- comment -%}
+Bewusst ohne <details>-Aufklapper: Ein geschlossenes <details> verbirgt seine
+Kinder ueber einen Mechanismus des Browsers, den sich per Media Query nicht
+verlaesslich wieder aufheben laesst - die Navigation war dadurch oberhalb von
+700 px unsichtbar UND nicht zu oeffnen. Sieben kurze Punkte brechen auf dem
+Telefon in zwei bis drei Zeilen um; das braucht keinen Aufklapper und ist
+sichtbar statt versteckt.
+{%- endcomment -%}
+<nav class="hauptnavigation" aria-label="Hauptnavigation">
+  <ul>
+    {%- for eintrag in site.data.navigation -%}
+      {%- assign aktiv = false -%}
+      {%- if page.url contains eintrag.ziel and eintrag.extern != true -%}
+        {%- assign aktiv = true -%}
+      {%- endif -%}
+      <li>
+        <a href="{{ eintrag.ziel }}"
+           {% if aktiv %}aria-current="page"{% endif %}
+           {% if eintrag.extern %}target="_blank" rel="noopener"{% endif %}>
+          {{ eintrag.titel }}{% if eintrag.extern %} <span aria-hidden="true">↗</span>{% endif %}
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>

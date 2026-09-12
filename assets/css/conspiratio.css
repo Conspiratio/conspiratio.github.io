@@ -1,0 +1,195 @@
+/* Conspiratio - conspiratio.net
+   Eine Datei, kein Framework. Die Custom Properties sind die einzige
+   Schaltstelle: Farben je Thema, Schriften je Schriftschalter. */
+
+/* ---------- Schriften (selbst ausgeliefert, SIL OFL) ---------- */
+@font-face { font-family: "Grenze Gotisch"; src: url("/assets/schriften/grenze-gotisch-400.woff2") format("woff2");
+             font-weight: 400; font-display: swap; }
+@font-face { font-family: "EB Garamond"; src: url("/assets/schriften/eb-garamond-400.woff2") format("woff2");
+             font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "EB Garamond"; src: url("/assets/schriften/eb-garamond-400-kursiv.woff2") format("woff2");
+             font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "EB Garamond"; src: url("/assets/schriften/eb-garamond-600.woff2") format("woff2");
+             font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible"; src: url("/assets/schriften/atkinson-hyperlegible-400.woff2") format("woff2");
+             font-weight: 400; font-display: swap; }
+@font-face { font-family: "Atkinson Hyperlegible"; src: url("/assets/schriften/atkinson-hyperlegible-700.woff2") format("woff2");
+             font-weight: 700; font-display: swap; }
+
+/* ---------- Helles Thema: das Pergament ---------- */
+:root {
+  --grund:          #efe3c8;
+  --grund-erhoben:  #f7eeda;
+  --schrift:        #2a1d0d;
+  --schrift-leise:  #5b4526;
+  --akzent:         #8a5a12;
+  --akzent-hell:    #6d4509;
+  --linie:          #c9b48a;
+
+  --schrift-zier:   "Grenze Gotisch", "Palatino Linotype", serif;
+  --schrift-text:   "EB Garamond", Georgia, serif;
+  --zeilenhoehe:    1.65;
+  --buchstabenabstand: 0;
+  --spaltenbreite:  38rem;   /* rund 70 Zeichen */
+}
+
+/* ---------- Dunkles Thema: das Kontor bei Kerzenlicht ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-thema="hell"]) {
+    --grund:         #14100b;
+    --grund-erhoben: #1f1810;
+    --schrift:       #ece0cb;
+    --schrift-leise: #b8a68b;
+    --akzent:        #e0a84a;
+    --akzent-hell:   #f2c477;
+    --linie:         #3d3122;
+  }
+}
+:root[data-thema="dunkel"] {
+  --grund:         #14100b;
+  --grund-erhoben: #1f1810;
+  --schrift:       #ece0cb;
+  --schrift-leise: #b8a68b;
+  --akzent:        #e0a84a;
+  --akzent-hell:   #f2c477;
+  --linie:         #3d3122;
+}
+
+/* ---------- Gut lesbare Schrift ---------- */
+:root[data-schrift="lesbar"] {
+  --schrift-zier: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --schrift-text: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --zeilenhoehe: 1.8;
+  --buchstabenabstand: 0.01em;
+}
+
+/* ---------- Grundlagen ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--grund);
+  color: var(--schrift);
+  font-family: var(--schrift-text);
+  font-size: clamp(1.05rem, 0.98rem + 0.35vw, 1.2rem);
+  line-height: var(--zeilenhoehe);
+  letter-spacing: var(--buchstabenabstand);
+}
+
+h1, h2, h3, .wortmarke {
+  font-family: var(--schrift-zier);
+  font-weight: 400;
+  line-height: 1.15;
+}
+h1 { font-size: clamp(2rem, 1.4rem + 2.6vw, 3.2rem); margin-top: 1.5rem; }
+h2 { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem); margin-top: 2rem; }
+h3 { font-size: 1.3rem; }
+
+a { color: var(--akzent); text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+a:hover { color: var(--akzent-hell); }
+:focus-visible { outline: 3px solid var(--akzent); outline-offset: 2px; }
+
+img { max-width: 100%; height: auto; }
+
+.zum-inhalt { position: absolute; left: -9999px; }
+.zum-inhalt:focus {
+  position: fixed; left: 0.5rem; top: 0.5rem; z-index: 10;
+  background: var(--grund-erhoben); padding: 0.5rem 1rem;
+}
+
+.textspalte { max-width: var(--spaltenbreite); margin: 0 auto; padding: 0 1.25rem 4rem; }
+
+/* ---------- Kopf ---------- */
+.kopf { text-align: center; padding: 1.5rem 1rem 0.5rem; }
+.wortmarke {
+  font-size: clamp(2.5rem, 1.6rem + 4vw, 4.5rem);
+  text-decoration: none; color: var(--schrift);
+}
+
+/* Der Holzbalken mit Fachwerkhaus, Kreuz, Hammer, Truhe, Schwert und Wagenrad
+   aus der alten Seite. Kein Hintergrundbild, sondern ein echtes: Gekachelt
+   zeigte er eine deutliche Naht (die Kanten weichen um 42 von 255 ab), und
+   beschneiden verbietet sich, weil die Symbole genau an den Raendern sitzen.
+   So skaliert er stattdessen mit - auf dem Telefon wird er schmaler. */
+.zierbalken {
+  display: block;
+  width: 100%;
+  max-width: 68rem;
+  margin: 0 auto;
+  border-block: 1px solid var(--linie);
+}
+:root[data-thema="dunkel"] .zierbalken { filter: brightness(0.72); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-thema="hell"]) .zierbalken { filter: brightness(0.72); }
+}
+
+/* ---------- Navigation ---------- */
+.hauptnavigation { background: var(--grund-erhoben); border-bottom: 1px solid var(--linie); }
+.hauptnavigation ul {
+  list-style: none; margin: 0; padding: 0.5rem 1rem;
+  display: flex; flex-wrap: wrap; gap: 0.35rem 1.5rem; justify-content: center;
+}
+.hauptnavigation a {
+  text-decoration: none; font-family: var(--schrift-zier); font-size: 1.25rem;
+}
+.hauptnavigation a[aria-current="page"] { color: var(--schrift); text-decoration: underline; }
+
+@media (max-width: 700px) {
+  .hauptnavigation ul { gap: 0.25rem 1rem; padding: 0.6rem 0.75rem; }
+  .hauptnavigation a { font-size: 1.15rem; }
+}
+
+/* ---------- Schalter ---------- */
+.schalter {
+  display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;
+  padding: 0.6rem 0.5rem 0;
+}
+.schalter button, .schalter a {
+  background: none; border: 1px solid var(--linie); color: var(--schrift-leise);
+  border-radius: 3px; padding: 0.3rem 0.7rem; cursor: pointer;
+  font: inherit; font-size: 0.9rem; line-height: 1.2; text-decoration: none;
+}
+.schalter button:hover, .schalter a:hover { color: var(--schrift); border-color: var(--akzent); }
+.schalter button[aria-pressed="true"] { color: var(--schrift); border-color: var(--akzent); }
+
+/* ---------- Bausteine ---------- */
+.knopf {
+  display: inline-block; background: var(--akzent); color: var(--grund);
+  padding: 0.7rem 1.4rem; border-radius: 3px; text-decoration: none;
+  font-family: var(--schrift-zier); font-size: 1.25rem;
+}
+.knopf:hover { background: var(--akzent-hell); color: var(--grund); }
+
+.aufmacher img {
+  width: 100%; height: auto; display: block;
+  max-height: 60vh; object-fit: cover;
+}
+.vorspann { font-size: 1.2em; }
+
+.galerie {
+  display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  max-width: 68rem; margin: 0 auto; padding: 0 1.25rem; list-style: none;
+}
+.galerie figure { margin: 0; }
+.galerie figcaption { font-size: 0.9rem; color: var(--schrift-leise); }
+
+.news-anriss { border-top: 1px solid var(--linie); padding-top: 1rem; margin-top: 1.5rem; }
+.news-anriss h2 { margin-top: 0; }
+.news-anriss time { color: var(--schrift-leise); font-size: 0.9rem; }
+
+.hinweis {
+  background: var(--grund-erhoben); border-left: 3px solid var(--akzent);
+  padding: 0.75rem 1rem;
+}
+
+.fuss {
+  border-top: 1px solid var(--linie); text-align: center; padding: 1.5rem 1rem;
+  color: var(--schrift-leise); font-size: 0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

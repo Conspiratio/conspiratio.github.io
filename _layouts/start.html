@@ -1,0 +1,20 @@
+---
+layout: basis
+---
+<div class="aufmacher">
+  <img src="/assets/bilder/kontor-aufmacher.webp"
+       alt="Ein Schreibtisch bei Kerzenlicht: Landkarte, Federkiel, Münzen, ein Dolch und ein versiegelter Brief"
+       width="1600" height="900">
+  <div class="textspalte">
+    <p class="vorspann">{{ site.description }}</p>
+    <p><a class="knopf" href="/downloads/">Herunterladen</a></p>
+  </div>
+</div>
+
+<section class="textspalte">
+  <h2>Ankündigungen</h2>
+  {%- for meldung in site.posts limit: 3 %}
+    {% include news-anriss.html meldung=meldung %}
+  {%- endfor %}
+  <p><a href="/news/">Alle Meldungen</a></p>
+</section>

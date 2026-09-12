@@ -1,0 +1,21 @@
+---
+layout: seite
+title: News
+permalink: /news/
+---
+<p>
+  Alle Ankündigungen zum Spiel. Als <a href="/feed.xml">RSS-Feed</a> abonnierbar.
+</p>
+
+{%- assign jahre = site.posts | group_by_exp: "meldung", "meldung.date | date: '%Y'" -%}
+{%- for jahr in jahre %}
+<h2>{{ jahr.name }}</h2>
+{%- for meldung in jahr.items %}
+  {% include news-anriss.html meldung=meldung %}
+{%- endfor %}
+{%- endfor %}
+
+<p class="hinweis">
+  Noch ältere Meldungen stehen im
+  <a href="https://forum.conspiratio.net/viewforum.php?f=32">Newsarchiv des Forums</a>.
+</p>

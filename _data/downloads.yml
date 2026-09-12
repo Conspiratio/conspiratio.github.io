@@ -1,0 +1,51 @@
+# Ein neues Release ist ein Eintrag hier, keine Änderung am Seitentext.
+# msi leer lassen, wenn es kein GitHub-Release mit Installationsprogramm gibt
+# (1.4.1 und 1.4.2 lagen nur auf dem alten Webspeicher).
+
+- version: "1.4.8"
+  datum: 2026-01-01
+  groesse: "236 MB"
+  msi: https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/1.4.8/Conspiratio.1.4.8.0.msi
+  changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#148---01012026
+
+- version: "1.4.7"
+  datum: 2024-12-24
+  groesse: "234 MB"
+  msi: https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/1.4.7/Conspiratio.1.4.7.0.msi
+  changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#147---24122024
+
+- version: "1.4.6"
+  datum: 2023-12-24
+  groesse: "234 MB"
+  msi: https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/1.4.6/Conspiratio.1.4.6.0.msi
+  changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#146---24122023
+
+- version: "1.4.5"
+  datum: 2022-12-24
+  groesse: "231 MB"
+  msi: https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/1.4.5/Conspiratio.1.4.5.0.msi
+  changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#145---24122022
+
+- version: "1.4.4"
+  datum: 2021-12-24
+  groesse: "218 MB"
+  msi: https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/1.4.4/Conspiratio.1.4.4.0.msi
+  changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#144---24122021
+
+- version: "1.4.3"
+  datum: 2020-12-24
+  groesse: "218 MB"
+  msi: https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/1.4.3/Conspiratio.1.4.3.0.msi
+  changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#143---24122020
+
+- version: "1.4.2"
+  datum: 2019-12-24
+  groesse: "217 MB"
+  msi:
+  changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#142---24122019
+
+- version: "1.4.1"
+  datum: 2018-12-24
+  groesse: "217 MB"
+  msi:
+  changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#141---24122018

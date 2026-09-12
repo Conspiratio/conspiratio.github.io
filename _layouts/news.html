@@ -1,0 +1,14 @@
+---
+layout: basis
+---
+<article class="textspalte">
+  <h1>{{ page.title }}</h1>
+  <p><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%d.%m.%Y" }}</time></p>
+  {%- if page.bild %}
+  <img src="{{ page.bild }}" alt="{{ page.bild_alt | default: page.title }}"
+       width="{{ page.bild_breite | default: 1000 }}"
+       height="{{ page.bild_hoehe | default: 563 }}" loading="lazy">
+  {%- endif %}
+  {{ content }}
+  <p><a href="/news/">← Alle Meldungen</a></p>
+</article>
