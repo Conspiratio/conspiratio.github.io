@@ -58,12 +58,6 @@ Administratorrechte für die Installation.
 {%- endfor %}
 </ul>
 
-<p class="hinweis">
-  Von 1.4.1 und 1.4.2 gibt es kein Installationsprogramm mehr: Beide wurden nie als
-  GitHub-Release veröffentlicht und lagen nur auf dem alten Webspeicher. Ihr Changelog ist
-  erhalten.
-</p>
-
 ## Hinweise zum Spiel
 
 Nähere Informationen stehen im [Wiki](https://github.com/Conspiratio/Conspiratio.Wiki/wiki),

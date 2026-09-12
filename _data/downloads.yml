@@ -1,6 +1,7 @@
 # Ein neues Release ist ein Eintrag hier, keine Änderung am Seitentext.
-# msi leer lassen, wenn es kein GitHub-Release mit Installationsprogramm gibt
-# (1.4.1 und 1.4.2 lagen nur auf dem alten Webspeicher).
+# msi leer lassen, wenn es kein Installationsprogramm zum Herunterladen gibt.
+# 1.4.1 und 1.4.2 lagen nur auf dem alten Webspeicher; sie sind seit dem
+# Archiv-Release gesichert.
 
 - version: "1.4.8"
   datum: 2026-01-01
@@ -41,11 +42,11 @@
 - version: "1.4.2"
   datum: 2019-12-24
   groesse: "217 MB"
-  msi:
+  msi: https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/archiv-2018-2019/Conspiratio.1.4.2.0.msi
   changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#142---24122019
 
 - version: "1.4.1"
   datum: 2018-12-24
   groesse: "217 MB"
-  msi:
+  msi: https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/archiv-2018-2019/Conspiratio.1.4.1.0.msi
   changelog: https://github.com/Conspiratio/Conspiratio.WinForms/blob/main/CHANGELOG.md#141---24122018
