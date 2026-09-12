@@ -1,0 +1,34 @@
+---
+layout: null
+permalink: /forum/
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <!--
+    Echte Seite mit Status 200 statt der 404-Seite - fuer die eine alte Adresse,
+    bei der das geht: conspiratio.net/forum/ selbst. Tiefenlinks wie
+    /forum/viewtopic.php sind nicht so zu behandeln, weil GitHub Pages .php-
+    Dateien als application/x-httpd-php ausliefert und der Browser sie dann
+    herunterlaedt statt anzeigt (gemessen). Die faengt weiterhin die 404-Seite.
+  -->
+  <title>Das Forum ist umgezogen</title>
+  <link rel="canonical" href="https://forum.conspiratio.net/">
+  <meta http-equiv="refresh" content="0; url=https://forum.conspiratio.net/">
+  <meta name="robots" content="noindex, follow">
+  <link rel="stylesheet" href="/assets/css/conspiratio.css">
+</head>
+<body>
+  <main id="inhalt" class="textspalte">
+    <h1>Das Forum ist umgezogen</h1>
+    <p>
+      Es liegt jetzt unter
+      <a href="https://forum.conspiratio.net/">forum.conspiratio.net</a>.
+      Falls Ihr nicht automatisch dorthin gelangt, folgt bitte dem Verweis.
+    </p>
+    <p><a href="/">Zur Startseite</a></p>
+  </main>
+</body>
+</html>

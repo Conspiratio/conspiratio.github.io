@@ -459,6 +459,24 @@ def die_fehlerseite_leitet_alte_adressen_weiter() -> None:
 
 
 @pruefung
+def die_forumswurzel_ist_eine_echte_seite() -> None:
+    """/forum/ bekommt eine eigene Seite statt der 404-Seite: Sie wird mit
+    Status 200 ausgeliefert und traegt eine Weiterleitung im <head>. Das geht
+    nur fuer diese eine Adresse - .php-Pfade liefert Pages als
+    application/x-httpd-php aus, der Browser wuerde sie herunterladen."""
+    text = lies("forum/index.html")
+    pruefe(text != "", "forum/index.html fehlt")
+    if not text:
+        return
+    pruefe("http-equiv=\"refresh\"" in text.replace("'", '"'),
+           "forum/index.html: keine Weiterleitung im <head>")
+    pruefe("https://forum.conspiratio.net/" in text,
+           "forum/index.html: nennt das Ziel nicht")
+    pruefe("noindex" in text,
+           "forum/index.html: sollte sich nicht selbst indexieren lassen")
+
+
+@pruefung
 def die_altlasten_sind_verschwunden() -> None:
     for name in ("cons.css", "OLDENGL.TTF", "Jurist_aufsuchen.png",
                  "header4.png", "pergament3.png", "hintIntro.png"):
