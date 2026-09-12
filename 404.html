@@ -1,0 +1,68 @@
+---
+layout: seite
+title: Seite nicht gefunden
+permalink: /404.html
+sitemap: false
+---
+
+{%- comment -%}
+Diese Seite fängt zwei Sorten alter Adressen ab, die es nach der Umstellung
+auf GitHub Pages nicht mehr gibt:
+
+  /forum/…      das Forum, das auf forum.conspiratio.net umgezogen ist
+  /downloads/…  die Installationsprogramme, die jetzt als Release-Anhänge
+                bei GitHub liegen
+
+Beides sind Adressen, die in Suchmaschinen, alten Rundmails und fremden Foren
+stehen. Die Weiterleitung ist JavaScript, weil GitHub Pages keine echte
+HTTP-Weiterleitung ausliefern kann. Ohne JavaScript steht darunter derselbe
+Weg als sichtbarer Verweis - deshalb ist die Seite auch ohne Skript brauchbar.
+{%- endcomment -%}
+
+<script>
+  (function () {
+    "use strict";
+    var pfad = window.location.pathname;
+    var anhang = window.location.search + window.location.hash;
+
+    // Das Forum: Pfad und Parameter unverändert an die Subdomain weiterreichen.
+    var forum = pfad.match(/^\/forum(\/.*)?$/);
+    if (forum) {
+      window.location.replace("https://forum.conspiratio.net" + (forum[1] || "/") + anhang);
+      return;
+    }
+
+    // Die alten Installationsprogramme liegen jetzt bei den GitHub-Releases.
+    // 1.4.1 und 1.4.2 hängen am Archiv-Release, alle übrigen an ihrem eigenen.
+    var msi = pfad.match(/^\/downloads\/Conspiratio\.(\d+\.\d+\.\d+)\.0\.msi$/i);
+    if (msi) {
+      var version = msi[1];
+      var tag = (version === "1.4.1" || version === "1.4.2") ? "archiv-2018-2019" : version;
+      window.location.replace(
+        "https://github.com/Conspiratio/Conspiratio.WinForms/releases/download/"
+        + tag + "/Conspiratio." + version + ".0.msi");
+      return;
+    }
+
+    // Sonst: die Seite unten anzeigen und den Pfad einblenden.
+    document.addEventListener("DOMContentLoaded", function () {
+      var stelle = document.getElementById("gesuchte-adresse");
+      if (stelle) { stelle.textContent = pfad; }
+    });
+  })();
+</script>
+
+Diese Adresse gibt es hier nicht (mehr)<span id="gesuchte-adresse-rahmen">:
+<code id="gesuchte-adresse"></code></span>
+
+Zwei Dinge sind umgezogen — falls Ihr von dort kommt:
+
+- **Das Forum** liegt jetzt unter [forum.conspiratio.net](https://forum.conspiratio.net/).
+  Wenn Euer Verweis auf `conspiratio.net/forum/…` zeigte, hängt einfach denselben Pfad
+  an die neue Adresse.
+- **Die Installationsprogramme** liegen bei den
+  [Releases auf GitHub](https://github.com/Conspiratio/Conspiratio.WinForms/releases) und
+  sind alle von der [Downloadseite](/downloads/) aus verlinkt.
+
+Ansonsten helfen vielleicht [die Startseite](/), [das Spiel](/spiel/),
+[die Bilder](/bilder/) oder [die Meldungen](/news/) weiter.

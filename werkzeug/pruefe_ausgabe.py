@@ -344,11 +344,14 @@ def die_englische_seite_ist_englisch_ausgezeichnet() -> None:
 
 @pruefung
 def kein_verweis_mehr_auf_das_alte_forum() -> None:
+    """Gemeint sind Verweise, nicht Erwaehnungen: Die 404-Seite nennt die alte
+    Adresse absichtlich im Text, um zu erklaeren, was umgezogen ist."""
+    muster = re.compile(r'(?:href|src)="[^"]*conspiratio\.net/forum[^"]*"', re.IGNORECASE)
     for seite in seiten():
         text = seite.read_text(encoding="utf-8")
         pfad = seite.relative_to(SITE)
-        pruefe("conspiratio.net/forum" not in text,
-               f"{pfad}: verweist noch auf conspiratio.net/forum statt forum.conspiratio.net")
+        for treffer in muster.findall(text):
+            pruefe(False, f"{pfad}: verweist noch auf das alte Forum: {treffer}")
 
 
 @pruefung
@@ -433,6 +436,26 @@ def die_alten_adressen_leiten_weiter() -> None:
         text = lies(alt)
         pruefe(text != "", f"{alt}: Weiterleitung fehlt")
         pruefe(neu in text, f"{alt}: leitet nicht auf {neu}")
+
+
+@pruefung
+def die_fehlerseite_leitet_alte_adressen_weiter() -> None:
+    """Nach der Umstellung landen alte Forums- und Downloadadressen auf der
+    404-Seite. Sie muss beide Faelle kennen, sonst laufen sie ins Leere."""
+    text = lies("404.html")
+    pruefe(text != "", "404.html fehlt")
+    if not text:
+        return
+    pruefe("forum.conspiratio.net" in text,
+           "404.html: leitet /forum/... nicht auf die Subdomain weiter")
+    pruefe("archiv-2018-2019" in text,
+           "404.html: kennt das Archiv-Release fuer 1.4.1/1.4.2 nicht")
+    pruefe("releases/download/" in text,
+           "404.html: leitet alte Downloadadressen nicht weiter")
+    # Ohne JavaScript muss derselbe Weg sichtbar dastehen.
+    ohne_skript = re.sub(r"<script\b.*?</script>", "", text, flags=re.S | re.I)
+    pruefe("forum.conspiratio.net" in ohne_skript,
+           "404.html: ohne JavaScript fuehrt kein sichtbarer Weg zum Forum")
 
 
 @pruefung
