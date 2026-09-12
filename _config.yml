@@ -1,0 +1,48 @@
+title: Conspiratio
+description: >-
+  Conspiratio ist eine freie Wirtschaftssimulation der frühen Neuzeit: Handel, Ämter,
+  Intrigen und eine Dynastie, die den eigenen Tod überdauern muss.
+url: https://conspiratio.net
+lang: de
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
+permalink: /news/:year/:month/:day/:title/
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: news }
+  - scope: { path: "" }
+    values: { layout: seite }
+
+feed:
+  path: feed.xml
+  posts_limit: 50   # Vorgabe waere 10; der Feed soll das ganze Archiv tragen
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - docs/
+  - werkzeug/
+  - massenmails/
+  - rohbilder/
+  - "*.txt"
+
+  # Die alte Seite. Sie bleibt bis Aufgabe 9 im Repo liegen, gehoert aber nicht
+  # mehr zur Ausgabe - und wuerde die Weiterleitungsstuempfe gleichen Namens
+  # verdecken, die jekyll-redirect-from erzeugt.
+  - geschichte.html
+  - download.html
+  - bilder.html
+  - ueber.html
+  - links.html
+  - kontakt.html
+  - cons.css
+  - OLDENGL.TTF
+  - Jurist_aufsuchen.png
