@@ -247,6 +247,16 @@ def jede_meldung_nennt_ihr_datum() -> None:
         pruefe("<time" in text, f"{meldung.relative_to(SITE)}: kein <time>-Element")
 
 
+@pruefung
+def das_archiv_reicht_bis_2018_zurueck() -> None:
+    jahre = {meldung.parts[-5] for meldung in meldungen()}
+    for jahr in ("2018", "2019", "2020", "2021", "2022", "2023", "2024", "2026"):
+        pruefe(jahr in jahre, f"im Archiv fehlt eine Meldung aus {jahr}")
+    archiv = lies("news/index.html")
+    for version in ("1.4.1", "1.4.8"):
+        pruefe(version in archiv, f"das Archiv nennt Version {version} nicht")
+
+
 def main() -> int:
     for funktion in PRUEFUNGEN:
         funktion()
