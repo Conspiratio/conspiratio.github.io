@@ -6,6 +6,13 @@
   ziel: /downloads/
 - titel: News
   ziel: /news/
+# Das Forum steht schon jetzt auf der Subdomain. Solange der Apex noch auf den
+# alten Webspeicher zeigt, ist sie nur dann erreichbar, wenn sie dort angelegt
+# wurde - siehe docs/umstellung-dns.md, Schritt 1.
+- titel: Forum
+  ziel: https://forum.conspiratio.net/
+  extern: true
+
 # Das eigenstaendige Handbuch zum Godot-Client entsteht erst
 # (https://conspiratio.github.io/Conspiratio.Wiki/ - derzeit 404). Bis dahin
 # zeigt der Menuepunkt auf das vorhandene Wiki, wie die alte Seite auch.

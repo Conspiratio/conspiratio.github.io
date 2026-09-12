@@ -7,7 +7,11 @@ redirect_from:
 
 Hier findet Ihr Verweise auf andere lesenswerte Seiten.
 
-{% for eintrag in site.data.links -%}
-**[{{ eintrag.titel }}]({{ eintrag.ziel }})**
-{{ eintrag.beschreibung }}
-{% endfor %}
+<ul class="linkliste">
+{%- for eintrag in site.data.links %}
+  <li>
+    <a href="{{ eintrag.ziel }}" target="_blank" rel="noopener">{{ eintrag.titel }}</a>
+    <span class="linkliste-text">{{ eintrag.beschreibung }}</span>
+  </li>
+{%- endfor %}
+</ul>

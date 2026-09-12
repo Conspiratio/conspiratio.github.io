@@ -485,6 +485,17 @@ def die_altlasten_sind_verschwunden() -> None:
 
 
 @pruefung
+def interne_unterlagen_gehen_nicht_mit_online() -> None:
+    """Entwicklerdoku und Quellmaterial gehoeren nicht auf die Seite. Jekyll
+    nimmt alles mit, was nicht in der exclude-Liste steht - das faellt ohne
+    Pruefung erst auf, wenn es veroeffentlicht ist."""
+    for name in ("CLAUDE.md", "README.md", "Gemfile", "Gemfile.lock"):
+        pruefe(not (SITE / name).exists(), f"{name} wird ausgeliefert")
+    for ordner in ("docs", "werkzeug", "quellen", "rohbilder", "massenmails"):
+        pruefe(not (SITE / ordner).exists(), f"{ordner}/ wird ausgeliefert")
+
+
+@pruefung
 def die_seitentitel_bleiben_kurz() -> None:
     """Ein Tab-Titel ueber 70 Zeichen ist in keiner Tableiste mehr zu lesen."""
     muster = re.compile(r"<title>(.*?)</title>", re.IGNORECASE | re.DOTALL)
