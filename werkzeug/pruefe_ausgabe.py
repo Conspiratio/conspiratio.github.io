@@ -209,6 +209,44 @@ def die_schalter_sind_bedienbar() -> None:
     pruefe("aria-pressed" in text, "index.html: Schalter ohne aria-pressed")
 
 
+def meldungen() -> list[pathlib.Path]:
+    """Alle gebauten Newsmeldungen (Permalink /news/JJJJ/MM/TT/kuerzel/)."""
+    return sorted(SITE.rglob("news/*/*/*/*/index.html"))
+
+
+@pruefung
+def das_newsarchiv_listet_jede_meldung() -> None:
+    archiv = lies("news/index.html")
+    pruefe(archiv != "", "news/index.html fehlt")
+    pruefe(len(meldungen()) > 0, "es wurde keine einzige Meldung gebaut")
+    for meldung in meldungen():
+        adresse = "/" + meldung.parent.relative_to(SITE).as_posix() + "/"
+        pruefe(adresse in archiv, f"Archiv listet {adresse} nicht")
+
+
+@pruefung
+def der_feed_ist_gueltiges_rss() -> None:
+    roh = lies("feed.xml")
+    pruefe(roh != "", "feed.xml fehlt")
+    if not roh:
+        return
+    try:
+        baum = ET.fromstring(roh)
+    except ET.ParseError as fehler:
+        pruefe(False, f"feed.xml ist kein gueltiges XML: {fehler}")
+        return
+    eintraege = baum.findall("{http://www.w3.org/2005/Atom}entry")
+    pruefe(len(eintraege) == len(meldungen()),
+           f"feed.xml hat {len(eintraege)} Eintraege, gebaut wurden {len(meldungen())} Meldungen")
+
+
+@pruefung
+def jede_meldung_nennt_ihr_datum() -> None:
+    for meldung in meldungen():
+        text = meldung.read_text(encoding="utf-8")
+        pruefe("<time" in text, f"{meldung.relative_to(SITE)}: kein <time>-Element")
+
+
 def main() -> int:
     for funktion in PRUEFUNGEN:
         funktion()
