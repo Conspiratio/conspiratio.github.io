@@ -293,6 +293,31 @@ def kein_verweis_mehr_auf_das_alte_forum() -> None:
                f"{pfad}: verweist noch auf conspiratio.net/forum statt forum.conspiratio.net")
 
 
+@pruefung
+def die_downloadseite_stellt_godot_voran() -> None:
+    text = lies("downloads/index.html")
+    pruefe("Godot" in text, "Downloadseite: der Godot-Client kommt nicht vor")
+    if "Godot" in text and "1.4.8" in text:
+        pruefe(text.index("Godot") < text.index("1.4.8"),
+               "Downloadseite: der Godot-Client steht nicht vor dem WinForms-Release")
+
+
+@pruefung
+def die_downloadseite_listet_jedes_release() -> None:
+    text = lies("downloads/index.html")
+    for version in ("1.4.8", "1.4.7", "1.4.6", "1.4.5", "1.4.4", "1.4.3", "1.4.2", "1.4.1"):
+        pruefe(version in text, f"Downloadseite: Version {version} fehlt")
+
+
+@pruefung
+def die_systemvoraussetzungen_sind_aktuell() -> None:
+    text = lies("downloads/index.html")
+    pruefe(".NET Framework 4.6.2" in text, "Downloadseite: WinForms-Voraussetzung fehlt")
+    pruefe(".NET 8" in text, "Downloadseite: Godot-Voraussetzung (.NET 8) fehlt")
+    pruefe("Windows 11" in text,
+           "Downloadseite: nennt Windows 11 nicht - die alte Seite hoerte bei Windows 10 auf")
+
+
 def main() -> int:
     for funktion in PRUEFUNGEN:
         funktion()
