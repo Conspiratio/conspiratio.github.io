@@ -13,11 +13,10 @@
   ziel: https://forum.conspiratio.net/
   extern: true
 
-# Das eigenstaendige Handbuch zum Godot-Client entsteht erst
-# (https://conspiratio.github.io/Conspiratio.Wiki/ - derzeit 404). Bis dahin
-# zeigt der Menuepunkt auf das vorhandene Wiki, wie die alte Seite auch.
+# Das eigenstaendige Handbuch zum Godot-Client ist veroeffentlicht, mit allen
+# Kapiteln und Bildern.
 - titel: Handbuch
-  ziel: https://github.com/Conspiratio/Conspiratio.Wiki/wiki
+  ziel: https://conspiratio.net/Conspiratio.Wiki/
   extern: true
 - titel: Mitmachen
   ziel: /mitmachen/
